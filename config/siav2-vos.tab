@@ -1,0 +1,51 @@
+# Astrolabe Project - SIA Image table configuration.
+# ----------------------------------------------------------------------
+
+[table]
+
+table-name = vos.siav2
+table-class = image.vao.mar2014
+description =
+    Prototype ObsCore-based SIAV2 Image table (NRAO, March2014).
+
+
+[standard]
+
+# Usage of standard fields of the DALServer-defined standard Image table.
+# By default all standard fields are returned, with null values if no value.
+
+# Example of field renaming:
+# ---------------------------------------------------------------------------
+# em_res_power		col=em_respower
+
+# Omit the following standard fields as these are not used.
+#
+# obs_creator_did		omit
+# obs_dataset_did		omit
+# pol_ucd			omit
+
+# Some common extension metadata not included in the core Image table.
+# Just uncomment a field if it is provided.
+# ---------------------------------------------------------------------------
+# obs_logo
+# contact_email
+# target_desc
+# target_redshift
+# s_resolution_min
+# s_resolution_max
+# em_bandpass
+# t_midpoint
+
+
+[custom]
+
+# Any provider-defined custom fields should be defined here.
+# Any VOTable attributes may be given; the VOTable field NAME attribute defaults
+# to the image table column name (at the left); DATATYPE defaults to char,
+# otherwise a value must be given. All other attributes
+# (UCD, UTYPE, UNIT, etc.) are optional.
+#
+# A few example custom fields:
+# ---------------------------------------------------------------------------
+# project_code		# Use all default attributes
+# file_set_id  		name=fileset_id datatype=char ucd=meta.id
