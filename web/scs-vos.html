@@ -1,0 +1,204 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+
+<meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+<meta HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<meta HTTP-EQUIV="Expires" CONTENT="0">
+
+<style type="text/css">
+
+    A.leftmenu:link{color:#ffffff; text-decoration: none; font-weight: bold; font-size: 14px; }
+    A.leftmenu:visited{color:#ffffff; text-decoration: none; font-weight: bold; font-size: 14px; }
+    A.leftmenu:hover{color:#ffffff; text-decoration: underline; font-weight: bold; font-size: 14px; }
+
+    A.leftmenu2:link{color:#ffcccc; text-decoration: none; font-weight: bold; font-size: 14px; }
+    A.leftmenu2:visited{color:#ffcccc; text-decoration: none; font-weight: bold; font-size: 14px; }
+    A.leftmenu2:hover{color:#ffcccc; text-decoration: underline; font-weight: bold; font-size: 14px; }
+
+    A.navig:link{color:#0000cc; text-decoration: none; font-weight: normal; font-size: 14px; }
+    A.navig:visited{color:#0000cc; text-decoration: none; font-weight: normal; font-size: 14px; }
+    A.navig:hover{color:#ff0000; text-decoration: underline; font-weight: normal; font-size: 14px; }
+
+    body{font-family: Helvetica; font-size:14px;}
+    td{font-family: Helvetica; color: #000000; font-size: 14px;}
+
+</style>
+
+<script language="Javascript" type="text/javascript">
+
+    var dayNames = new Array ();
+	dayNames[0]="Sunday";
+	dayNames[1]="Monday";
+	dayNames[2]="Tuesday";
+	dayNames[3]="Wednesday";
+	dayNames[4]="Thursday";
+	dayNames[5]="Friday";
+	dayNames[6]="Saturday";
+
+    var monthNames = new Array ();
+	monthNames[0]="January";
+	monthNames[1]="February";
+	monthNames[2]="March";
+	monthNames[3]="April";
+	monthNames[4]="May";
+	monthNames[5]="June";
+	monthNames[6]="July";
+	monthNames[7]="August";
+	monthNames[8]="September";
+	monthNames[9]="October";
+	monthNames[10]="November";
+	monthNames[11]="December";
+
+    var now = new Date();
+    var day = now.getDay();
+    var month = now.getMonth();
+    var year = now.getFullYear();
+    var date = now.getDate();
+
+</script>
+
+<!-- ======================================================================= -->
+
+<title>DALServer Demonstration/Test Queries</title>
+
+</head>
+<body bgcolor="#dfdfdf">
+<TABLE width="100%" cellpadding=0 cellspacing=0 border=0 bgcolor="#000000">
+    <tr>
+	<td colspan=1 width="100%" height=50 align=left bgcolor="#003366">
+	  <a href="http://vaosa-vm1.aoc.nrao.edu/vo/dalserver">
+	  <img src="docs/images/dalserver-title.jpg" alt="dalserver" border=0>
+	  </a>
+	</td>
+	<td colspan=1 width="100%" height=50 align=right bgcolor="#aaaaaa">
+	  <a href="http://www.usvao.org">
+	  <img src="docs/images/VAO_logo_100.png" alt="vao" border=0>
+	  </a>
+	</td>
+    </tr>
+    <tr>
+	<td width="100%" colspan=2 height=5 align=right bgcolor="#000000">
+	    <font color="#ffffff" face=Helvetica size=-1>
+	    <script language="Javascript" type="text/javascript">
+	    document.write(dayNames[day] + ", " + monthNames[month] + " ");
+	    document.write(date + ", " + year );
+	    document.write("&nbsp;");
+	    </script>
+	    </font>
+	</td>
+    </tr>
+    <tr>
+	<td width="100%" colspan=2 height=20 align=left bgcolor="#cccccc" valign=middle></td>
+    </tr>
+</TABLE>
+
+
+<BODY BGCOLOR="#ffffff" TEXT="#000000">
+<FONT face="helvetica,arial">
+
+
+<!-- ======================================================================= -->
+<!-- ======================================================================= -->
+
+<TABLE align=left width=750 border=0 cellspacing=0 cellpadding=0>
+    <tr><td>
+
+<!-- ======================================================================= -->
+<FORM ACTION="/ivoa-dal/scs-vos" METHOD="GET">
+    <INPUT type="hidden" name="REQUEST" value="queryData"</INPUT>
+
+    <tr><td> <hr noshade width="750" align="left" size=10> </td></tr>
+    <tr><td>
+	<TABLE width="750"  align="left" border=0>
+	    <tr><td> <h3 align=left>SCS <a name="scsp">(Cone Search) Test Service</a></h3> </td>
+	    <td align=right>(defaults to Messier catalog)</td></tr>
+	</TABLE>
+    </td></tr>
+    <tr><td> </td></tr>
+
+    <tr><td>
+	<TABLE width="750"  align="left" border=0>
+	    <TR><TD align=left><b>Search Region</b> (Debug <INPUT type=checkbox NAME="Debug"/>):</TD></TR>
+	</TABLE>
+    </td></tr>
+
+    <tr><td>
+	<TABLE WIDTH="750" ALIGN="LEFT" BORDER="0">
+	    <TR>
+		<TD ALIGN="RIGHT">RA (degrees):</TD>
+		<TD> <INPUT NAME="RA" SIZE="20" VALUE="180.0"/> </TD>
+		<TD ALIGN="RIGHT">DEC (degrees):</TD>
+		<TD> <INPUT NAME="DEC" SIZE="20" VALUE="1.0"/> </TD>
+	    </TR>
+	    <TR>
+		<TD ALIGN="RIGHT">SR (search radius degrees):</TD>
+		<TD> <INPUT NAME="SR" SIZE="20" value="90.0"/> </TD>
+		<TD ALIGN="RIGHT">VERB (table verbosity 1,2,3):</TD>
+		<TD> <INPUT NAME="VERB" SIZE="20" value="3" disabled/> </TD>
+	    </TR>
+	</TABLE>
+    </td></tr>
+
+    <tr><td> <hr noshade width="750" align="left" size=1> </td></tr>
+
+    <tr><td>
+	<TABLE width="750"  align="left" border=0>
+	    <TR> <TD align=left><b>Available Tables: </b></TD>
+	    <td align=left> <font size=-1>
+                <input type="radio" name="FROM" value="messier" checked>Messier catalog (builtin version)</input>
+		<input type="radio" name="FROM" value="jwst" checked>Astrolabe JWST Data</input>
+	    </font> </td> </tr>
+	</TABLE>
+    </td></tr>
+
+    <tr><td> <hr noshade width="750" align="left" size=1> </td></tr>
+
+    <tr><td>
+	<TABLE width="750"  align="left" border=0>
+	    <TR> <TD align=left><b>Output Data Formats: </b></TD>
+	    <td align=left> <font size=-1>
+		<input type="radio" name="FORMAT" value="html" checked>HTML&nbsp;</input>
+		<input type="radio" name="FORMAT" value="text">Text&nbsp;</input>
+		<input type="radio" name="FORMAT" value="csv">CSV&nbsp;</input>
+		<input type="radio" name="FORMAT" value="votable">VOTable&nbsp;</input>
+		<input type="radio" name="FORMAT" value="fits" disabled>FITS</input>
+	    </font> </td> </tr>
+	</TABLE>
+    </td></tr>
+
+    <tr><td> <hr noshade width="750" align="left"> </td></tr>
+    <tr><td>
+	<TABLE width="750" bgcolor=#d3d3d3 cellspacing=0 cellpadding=0 border=0>
+	    <TR><TD ALIGN="CENTER"><INPUT TYPE="SUBMIT"></TD>
+	    <TD ALIGN="CENTER"><INPUT TYPE="RESET" VALUE="Reset Form"></TD> </TR>
+	</TABLE>
+    </td></tr>
+    <tr><td> <hr noshade width="750" align="left"> </td></tr>
+
+</FORM>
+
+<!-- ======================================================================= -->
+<!-- ======================================================================= -->
+
+    </td></tr>
+
+    <TR><TD></TD></TR>
+    <tr><td> <hr noshade width="750" align="left" size=10> </td></tr>
+    <TR><TD></TD></TR>
+
+    <tr><td>
+	<TABLE WIDTH="750">
+	    <TR><TD>
+		Please direct <a HREF="mailto:dtody@nrao.edu"> feedback and/or questions</a>
+		concerning the DALServer toolkit to the author.
+	    </TD></TR>
+	</TABLE>
+    </td></tr>
+    <tr><td> <hr noshade width="750" align="left"> </td></tr>
+
+</TABLE>
+
+</FONT>
+</BODY>
+</HTML>
