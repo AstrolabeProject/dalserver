@@ -3,7 +3,7 @@
 
 [table]
 
-table-name = vos.siav2
+table-name = sia.siav2
 table-class = image.vao.mar2014
 description =
     Prototype ObsCore-based SIAV2 Image table (NRAO, March2014).
