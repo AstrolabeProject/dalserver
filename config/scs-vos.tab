@@ -39,8 +39,15 @@ description =
 
 # Omit the following fields.
 # ---------------------------------------------------------------------------
+calib_level             omit
 equinox                 omit
 facility_name           omit
+im_naxes                omit
+im_numsubarrays         omit
+im_pixtype              omit
+im_wcsaxes1             omit
+im_wcsaxes2             omit
+o_ucd                   omit
 obs_bandpass            omit
 obs_creation_date       omit
 s_fov                   omit
