@@ -48,7 +48,7 @@ public class SiapQuery extends DbmsQuery {
      * @param	response	The request response object.
      *
      * The metadata returned by a service is dynamically configurable.
-     * By default certain common fields of the Image data model are 
+     * By default certain common fields of the Image data model are
      * returned (what is considered "common" here is defined by this
      * implementation).  The specific service configuration may restrict
      * or extend this standard set of metadata, adding additional standard
@@ -88,12 +88,12 @@ public class SiapQuery extends DbmsQuery {
         // metadata is available will have null values, but this is harmless.
         // In the simplest case the data provider merely provides an Image
         // table instance for the service, and the generic framework does
-        // the rest.  Per-service table configuration may be used to further
+        // the rest. Per-service table configuration may be used to further
         // restrict, extend, or customize the standard query response metadata.
         //
         // The fields added below basically correspond to the DALServer-defined
         // Image table, or dynamically derived/generate metadata, and may be
-        // optionally omitted or customized if specified in the per-serivce
+        // optionally omitted or customized if specified in the per-service
         // configuration.
 
         // Get the per-service table configuration, if any.
@@ -369,7 +369,7 @@ System.err.println ("queryDataset(): '" + query + "'\n");
         // Check for SR=180 degrees (entire sky).
 	allSky = (Math.abs(ra_sr - 180.0) < 0.000001);
 
-	// If no search region specified the spatial constraint is 
+	// If no search region specified the spatial constraint is
 	// disabled.
 	if (allSky)
 	    spatial_constraint = false;
@@ -459,7 +459,7 @@ System.err.println ("queryDataset(): '" + query + "'\n");
                 }
                 if (formats.contains("graphic")) {
                     retGraphic = true;
-                    nFormats++; 
+                    nFormats++;
                 }
             }
         }
@@ -468,11 +468,11 @@ System.err.println ("queryDataset(): '" + query + "'\n");
 	// implemented, e.g., SPECRES, SPATRES, TIMERES, etc.
 
 	// Most of the simpler optional query parameters are handled directly
-	// below as we compose the DBMS query.  
+	// below as we compose the DBMS query.
 
 	// Compose the DBMS query.
 	//-------------------------------------
-	String subselect = "(SELECT * FROM " + tableName + 
+	String subselect = "(SELECT * FROM " + tableName +
 		" WHERE q3c_radial_query (s_ra,s_dec," + ra + "," + dec + ",4.0)) s ";
 	//String query = "SELECT * FROM " + tableName + " WHERE ";
 	String query = "SELECT * FROM " + subselect + " WHERE ";
@@ -490,7 +490,6 @@ System.err.println ("queryDataset(): '" + query + "'\n");
 	    // than the actual ROI.  (this old looks to have a problem at
 	    // the 0/360 boundary for RA, but lets' ignore this for the
 	    // moment until the code is redone.)
- 
 	    double ra1 = ra - ra_size;  double ra2 = ra + ra_size;
 	    double dec1 = Math.max(-90.0, Math.min(90.0, dec - dec_size));
 	    double dec2 = Math.max(-90.0, Math.min(90.0, dec + dec_size));
@@ -506,7 +505,7 @@ System.err.println ("query(): poly: '" + poly + "'\n");
 
 	    // This needs to be generalized to allow for a spatial position
 	    // specified as NULL, e.g, for theory data.
-	   
+
 	  if (1 < 0) {
 	    // Handle the case of RA+SR crossing the 0/360 point.
 	    if (ra1 < 0) {
@@ -772,7 +771,7 @@ System.err.println ("query(): '" + query + "'\n");
 
 	    // Walk through the resultset and output each row.
 	    int recnum = (maxrec > 0) ? maxrec : 1;
-	    while (rs.next() && recnum > 0) { 
+	    while (rs.next() && recnum > 0) {
 	        double pos_ra=ra, pos_dec=dec;
 		double scale, ra_dist, dec_dist;
 		double obj_ra, obj_dec, dx;
@@ -832,14 +831,14 @@ System.err.println ("query(): '" + query + "'\n");
 		// images that can be derived from it if accessed.  These
 		// include dynamically formatted datasets such as a graphics
 		// rendition, and virtual images such as a cutout.
-	
+
 		String imageFormat = getColumn(rs, "access_format").toLowerCase();
 		String assocType = "MultiFormat";
 		String assocId = null;
 		int nAssoc = 0;
 
 		if (nFormats > 1)
-		    assocId = assocType + "." + new Integer(nAssoc++).toString(); 
+		    assocId = assocType + "." + new Integer(nAssoc++).toString();
 
 		String[] imageTypes = { "archival", "virtual" };
 		String pubDID;
@@ -1045,7 +1044,6 @@ System.err.println ("query(): '" + query + "'\n");
 	// The creation type is computed by the service, not merely copied
 	// from the Image table.  Currently we only support whole-file
 	// retrival, so the value is fixed as "archival".
-	
 	String creation_type = "archival";
 
 	// Compute image axes descriptive metadata.  Items like Naxis and
@@ -1202,7 +1200,6 @@ System.err.println ("query(): '" + query + "'\n");
 	// Process the virtual image metadata and edit the current record.
 	// Any keywords that are present in both the keyword table and the
 	// response object will be updated.
-	
 	for (Map.Entry<String,String> entry : tab.entrySet()) {
 	    String key = entry.getKey();
 	    String value = entry.getValue();
@@ -1221,7 +1218,6 @@ System.err.println ("query(): '" + query + "'\n");
      * @param	columnName	The name of the desired column.
      */
     private String getColumn(ResultSet rs, String columnName) {
-    
 	// The table config may map logical->physical table column name.
 	String colname = getColName(columnName);
 
@@ -1242,7 +1238,6 @@ System.err.println ("query(): '" + query + "'\n");
      * @param	columnName	The canonical name of the column.
      */
     private String getColName(String columnName) {
-    
 	// The table config may map logical->physical table column name.
 	String colname = null;
 	if (this.configTable != null)

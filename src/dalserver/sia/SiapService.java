@@ -245,82 +245,6 @@ public class SiapService {
 		    throw new DalServerException(error.getMessage());
 	    }
 
-	} else if (queryType.equalsIgnoreCase("vao-fall2013")) {
-	    // The fall 2013 VAO SIAV2 prototype semantics are implemented
-	    // in the (now obsolete) custom SiapMySql query class.
-
-	    if (dbName != null && tableName != null) {
-		SiapMySql mysql = null;
-		Exception error = null;
-
-		try {
-		    mysql = new SiapMySql(jdbcDriver);
-		    mysql.connect(jdbcUrl, dbName, dbUser, dbPassword);
-		} catch (Exception ex) {
-		    throw new DalServerException("Cannot connect to MySQL database");
-		}
-
-		try {
-		    // Create fields in the output table for all columns in the main
-		    // SIAV2 DBMS metadata table defined for this service.
-		    mysql.addFields(params, response);
-
-		    // Execute the SIAP query.
-		    mysql.query(this, params, response);
-
-		} catch (DalOverflowException ex) {
-		    // Just quit normally if overflow occurs.
-		    error = null;
-		} catch (Exception ex) {
-		    error = ex;
-		} finally {
-		    if (mysql != null)
-			mysql.disconnect();
-		    if (error != null)
-			throw new DalServerException(error.getMessage());
-		}
-	    } else
-		throw new DalServerException("DBMS table not specified");
-
-	} else if (queryType.equalsIgnoreCase("oracle")) {
-	    // This driver has been replaced by SiapQuery and is no longer
-	    // used, but lets keep it around for now.
-
-	    if (dbName != null && tableName != null) {
-		SiapOracle oracle = null;
-		Exception error = null;
-
-		try {
-		    oracle = new SiapOracle(jdbcDriver);
-		    oracle.connect(jdbcUrl, dbName, dbUser, dbPassword);
-		} catch (Exception ex) {
-		    throw new DalServerException("Cannot connect to Oracle database");
-		}
-
-		try {
-		    // Create fields in the output table for all columns in the main
-		    // SIAV2 DBMS metadata table defined for this service.
-		    oracle.addFields(params, response);
-
-		    // Execute the SIAP query.
-		    oracle.query(this, params, response);
-
-		} catch (DalOverflowException ex) {
-		    // Just quit normally if overflow occurs.
-		    error = null;
-		} catch (Exception ex) {
-		    error = ex;
-		} finally {
-		    if (oracle != null)
-			oracle.disconnect();
-		    if (error != null) {
-			throw new DalServerException("Oracle query error (" +
-			    error.getMessage() + ")");
-		    }
-		}
-	    } else
-		throw new DalServerException("DBMS table not specified");
-
 	} else {
 	    // Execute a generic DBMS query using SiapQuery.
 
@@ -341,9 +265,7 @@ public class SiapService {
 		    dbms.addFields(params, response);
 
 		    // Execute the SIAP query.
-		    // 
-System.err.println ("Executing query: ''");
-		    
+		    //
 		    dbms.query(this, params, response);
 
 		} catch (DalOverflowException ex) {
@@ -392,16 +314,16 @@ System.err.println ("Executing query: ''");
      * as returned in an earlier call to the queryData operation.
      *
      * The interpretation of PubDID and how it is used is up to the service.
-     * In a simple case it provides a key which can be used to retrieve an 
+     * In a simple case it provides a key which can be used to retrieve an
      * archival dataset.  In another case, the service might generate a
      * unique PubDID on the fly for each virtual dataset described in the
      * query response (e.g., for a cutout or other virtual dataset), either
      * building sufficient information into the PubDID (and hence the URL)
-     * to specify the dataset to be generated, or saving internally a 
+     * to specify the dataset to be generated, or saving internally a
      * persistent description of the virtual dataset, indexed by the PubDID.
      * The service can later generate the dataset on the fly if and when it
      * is subsequently requested by the client.
-     *  
+     *
      * @param	params	The fully processed SIAP parameter set representing
      *			the request to be processed.  Upon output the
      *			parameters datasetContentType, datasetContentLength
@@ -540,7 +462,7 @@ System.err.println ("Executing query: ''");
 	    // By default only uncompressed datasets are returned to the
 	    // client.  The COMPRESS parameter may be used to enable return
 	    // of compressed dataset files.
-	    
+
 	    String filePath = imagefile;
 	    if (imagefile.toLowerCase().endsWith(".gz"))
 		filePath = imagefile.substring(0, imagefile.length()-3);
@@ -586,7 +508,7 @@ System.err.println ("Executing query: ''");
 		    fileType = "image/fits";
 	    }
 
-	    // Check for a valid file length. 
+	    // Check for a valid file length.
 	    if (gunzip)
 		fileLength = -1;
 	    else if (fileLength <= 0) {
@@ -636,7 +558,7 @@ System.err.println ("Executing query: ''");
 	return (in);
     }
 
-    
+
     /**
      * Clean up after a call to accessData.  This is used to close the
      * InputStream returned by a prior call to accessData (passed as the
@@ -761,7 +683,6 @@ System.err.println ("Executing query: ''");
         // POLARIZATION Coverage.
 	// ------------------
 	// omitted for now.
-	
 
 	// --- PIXEL TERM ---
         if ((p = params.getParam("SECTION")) != null && p.isSet()) {
@@ -921,7 +842,7 @@ System.err.println ("Executing query: ''");
 	    taskman = new TaskManager();
 
 	// Connect to the daemon if not already connected, otherwise check
-	// that we still have an active connection and reconnect if 
+	// that we still have an active connection and reconnect if
 	// necessary.
 
 	if (taskman.getConnection(tdName) == null)
@@ -947,7 +868,7 @@ System.err.println ("Executing query: ''");
      * @param	params	The fully processed SIAP parameter set representing
      *			the request to be processed.
      *
-     * @return		An InputStream which can be used to read the 
+     * @return		An InputStream which can be used to read the
      *			formatted getCapabilities metadata document.
      *			It is up to the caller to close the returned stream
      *			when the data has been read.
@@ -988,7 +909,7 @@ System.err.println ("Executing query: ''");
 	    // Set the request response context for SIAP.
 	    SiapKeywordFactory siap = new SiapKeywordFactory(r, "main", null);
 
-	    // Perform the query. 
+	    // Perform the query.
 	    service.queryData(params, r);
 
 	    // Write out the VOTable to a file.
