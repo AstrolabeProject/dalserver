@@ -3,7 +3,7 @@
 
 [table]
 
-table-name = jwst
+table-name = sia.jwst
 table-class = image.vao.mar2014
 description =
     ObsCore-based SCS Image table.
@@ -47,14 +47,14 @@ s_fov                   omit
 s_region                omit
 t_resolution            omit
 t_xel                   omit
-# ra1		omit
-# dec1		omit
-# ra2		omit
-# dec2		omit
-# ra3		omit
-# dec3		omit
-# ra4		omit
-# dec4		omit
+# im_ra1		omit
+# im_dec1		omit
+# im_ra2		omit
+# im_dec2		omit
+# im_ra3		omit
+# im_dec3		omit
+# im_ra4		omit
+# im_dec4		omit
 
 # [custom]
 # We can't add custom fields for SCS since there is no data model to extend.
