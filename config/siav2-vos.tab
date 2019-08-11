@@ -19,6 +19,7 @@ description =
 # em_res_power		col=em_respower
 # t_min                 col=time_start
 # t_max                 col=time_stop
+# obs_bandpass            col=filter
 
 
 # Omit the following fields as these are not used.
@@ -36,7 +37,6 @@ description =
 equinox                 omit
 facility_name           omit
 im_scale                omit
-obs_bandpass            omit
 obs_creation_date       omit
 s_fov                   omit
 s_region                omit
