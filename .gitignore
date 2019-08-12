@@ -1,0 +1,13 @@
+*.iws
+.idea/
+.DS_Store
+.settings
+/*.log
+/*.zip
+**/.gradle/
+/build/
+/SAVE/
+out
+dalserver.iml
+dist/dalserver.jar.ORIG
+dist/ivoa-dal.war.ORIG
