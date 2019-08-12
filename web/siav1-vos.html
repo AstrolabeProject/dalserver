@@ -133,26 +133,38 @@
 		<TD> <INPUT NAME="SIZE" SIZE="20" value="0.2"/> </TD>
 	    </TR>
 	    <TR>
-		<TD ALIGN="right">TIME (ISO time):</TD>
-		<TD> <INPUT NAME="TIME" SIZE="20" VALUE=""/> </TD>
-		<TD ALIGN="right">MODULE (A or B): </TD>
-		<TD> <INPUT NAME="MODULE" SIZE="20" VALUE="A"/> </TD>
-	    </TR>
-	    <TR>
-		<TD ALIGN="right">FILTER:</TD>
-		<TD> <INPUT NAME="FILTER" SIZE="20" VALUE=""/> </TD>
-		<TD ALIGN="right">PUPIL: </TD>
-		<TD> <INPUT NAME="PUPIL" SIZE="20" VALUE=""/> </TD>
-	    </TR>
-	    <TR>
-		<TD ALIGN="right">COLLECTION (e.g., "alma,jvla"): </TD>
-		<TD> <INPUT NAME="COLLECTION" SIZE="20" VALUE=""/> </TD>
 		<TD ALIGN="right">PUBDID (dataset ID): </TD>
 		<TD> <INPUT NAME="PUBDID" SIZE="20" VALUE=""/> </TD>
+	        <TD ALIGN="right">TIME (ISO time):</TD>
+		<TD> <INPUT NAME="TIME" SIZE="20" VALUE=""/> </TD>
+	    </TR>
+            <TR>
+               <TD ALIGN="right">SPATRES (min spatial resolution): </TD>
+               <TD> <INPUT NAME="SPATRES" SIZE="20" VALUE=""/> </TD>
+               <TD ALIGN="right">FOV (degrees):</TD>
+               <TD> <INPUT NAME="FOV" SIZE="20" VALUE=""/> </TD>
+            </TR>
+            <TR>
+               <TD ALIGN="right">DATA TYPE ("image|cube"): </TD>
+               <TD> <INPUT NAME="DPTYPE" SIZE="20" VALUE="image" disabled/> </TD>
+               <TD ALIGN="right">MODE ("archival|cutout|match"): </TD>
+               <TD> <INPUT NAME="MODE" SIZE="20" VALUE="archival" disabled/> </TD>
+            </TR>
+            <TR>
+               <TD ALIGN="right">FACILITY:</TD>
+               <TD> <INPUT NAME="FACILITY" SIZE="20" VALUE=""/> </TD>
+               <TD ALIGN="right">INSTRUMENT: </TD>
+               <TD> <INPUT NAME="INSTRUMENT" SIZE="20" VALUE=""/> </TD>
+            </TR>
+	    <TR>
+                <TD ALIGN="right">BAND (meters):</TD>
+                <TD> <INPUT NAME="BAND" SIZE="20" VALUE=""/> </TD>
 	    </TR>
 	    <TR>
 		<TD ALIGN="right">MAXREC: </TD>
 		<TD> <INPUT NAME="MAXREC" SIZE="20" VALUE=""/> </TD>
+                <TD ALIGN="RIGHT">VERB (table verbosity 1,2,3):</TD>
+                <TD> <INPUT NAME="VERB" SIZE="20" value="3"/> </TD>
 	    </TR>
 	</TABLE>
     </td></tr>
@@ -174,9 +186,9 @@
 
     <tr><td>
 	<TABLE width="750"  align="left" border=0>
-	    <TR> <TD align=left><b>Output Data Formats: </b></TD>
+	    <TR> <TD align=left><b>Data Formats: </b></TD>
 	    <td align=left> <font size=-1>
-		<input type="radio" name="FORMAT" value="all" checked>All available formats&nbsp;</input>
+		<input type="radio" name="FORMAT" value="all" checked>All available&nbsp;</input>
 		<input type="radio" name="FORMAT" value="fits">FITS image&nbsp;</input>
 		<input type="radio" name="FORMAT" value="graphic">Graphics image</input>
 	    </font> </td> </tr>
@@ -206,7 +218,6 @@
 
 </FORM>
 <!----------------------------------------------------------------------------->
-
     <TR><TD></TD></TR>
     <tr><td> <hr noshade width="750" align="left" size=10> </td></tr>
     <TR><TD></TD></TR>
@@ -214,7 +225,7 @@
     <tr><td>
 	<TABLE WIDTH="750">
 	    <TR><TD>
-		Last modified: 8/9/2019 by the Astrolabe project at the U of Arizona.
+		Last modified: 8/11/2019 by the Astrolabe project at the U of Arizona.
 	    </TD></TR>
 	</TABLE>
     </td></tr>
