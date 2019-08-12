@@ -13,7 +13,7 @@
 
   <property name="app.name"      value="ivoa-dal"/>
   <property name="app.path"      value="/${app.name}"/>
-  <property name="app.version"   value="0.7-sia2dev"/>
+  <property name="app.version"   value="0.8-sia2dev"/>
   <property name="lib.name"      value="dalserver"/>
   <property name="build.home"    value="${basedir}/build"/>
   <property name="config.home"    value="${basedir}/config"/>
@@ -71,8 +71,8 @@
   <property name="compile.debug"       value="true"/>
   <property name="compile.deprecation" value="false"/>
   <property name="compile.optimize"    value="false"/>
-  <property name="compile.source"      value="1.5"/>
-  <property name="compile.target"      value="1.5"/>
+  <property name="compile.source"      value="1.8"/>
+  <property name="compile.target"      value="1.8"/>
 
 <!-- ================= External Dependencies =========================== -->
 
@@ -81,11 +81,11 @@
   <property name="texttable.jar" value="${basedir}/lib/texttable.jar"/>
   <property name="fits.jar" value="${basedir}/lib/nom-tam-fits-1.11.jar"/>
   <property name="nom.tam.fits.jar" value="${basedir}/lib/nom-tam-fits-1.11.jar"/>
-  <property name="mysql-jdbc.jar" 
+  <property name="mysql-jdbc.jar"
             value="${basedir}/lib/mysql-connector-java-5.1.26-bin.jar"/>
-  <property name="postgresql-jdbc.jar" 
+  <property name="postgresql-jdbc.jar"
             value="${basedir}/lib/postgresql-jdbc.jar"/>
-  <property name="oracle-jdbc.jar" 
+  <property name="oracle-jdbc.jar"
             value="${basedir}/lib/ojdbc14.jar"/>
   <property name="junit.jar" value="${basedir}/lib/junit-4.8.1.jar"/>
   <property name="nekohtml.jar" value="${basedir}/lib/nekohtml.jar"/>
@@ -110,7 +110,7 @@
   <property name="commons-pool.jar"
 	    value="${basedir}/lib/commons-pool-1.6.jar"/>
     <!--
-  <property name="tomcat-servlet-3.0-api.jar" 
+  <property name="tomcat-servlet-3.0-api.jar"
 	    value="${basedir}/lib/tomcat-servlet-3.0-api.jar"/>
          -->
   <property name="javax.servlet.jar" value="${basedir}/lib/javax.servlet.jar"/>
