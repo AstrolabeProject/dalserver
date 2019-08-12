@@ -102,10 +102,11 @@ public class CoordSys {
         catch (TransformUndefinedException ex) {
             return null;
         }
-        catch (CoordTransformException ex) {
-            throw new IllegalArgumentException("Bad conversion: " + 
-                                               ex.getMessage(), ex);
-        }
+        // // following catch clause deemed "unreachable" by the Java 8 compiler:
+        // catch (CoordTransformException ex) {
+        //     throw new IllegalArgumentException("Bad conversion: " + 
+        //                                        ex.getMessage(), ex);
+        // }
     }
 
     FITSCoordMetadata createCoordMetadata(FITSHeaderKeywords fhk, int hduIndex) {
