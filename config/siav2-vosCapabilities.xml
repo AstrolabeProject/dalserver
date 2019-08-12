@@ -6,19 +6,19 @@
 
   <capability standardID="ivo://ivoa.net/std/VOSI#capabilities">
     <interface xsi:type="vod:ParamHTTP">
-      <accessURL use="full">http://replace.me.com/sia2/capabilities</accessURL>
+      <accessURL use="full">http://localhost:8080/capabilities</accessURL>
     </interface>
   </capability>
 
   <capability standardID="ivo://ivoa.net/std/VOSI#availability">
     <interface xsi:type="vod:ParamHTTP">
-      <accessURL use="full">http://replace.me.com/sia2/availability</accessURL>
+      <accessURL use="full">http://localhost:8080/availability</accessURL>
     </interface>
   </capability>
 
   <capability standardID="ivo://ivoa.net/std/SIA#query-2.0">
     <interface xsi:type="vod:ParamHTTP" role="std" version="1.0">
-      <accessURL use="full">http://replace.me.com/sia2/query</accessURL>
+      <accessURL use="full">http://localhost:8080/siav2-vos/query</accessURL>
     </interface>
   </capability>
 
