@@ -13,7 +13,7 @@
 
   <property name="app.name"      value="ivoa-dal"/>
   <property name="app.path"      value="/${app.name}"/>
-  <property name="app.version"   value="0.8-sia2dev"/>
+  <property name="app.version"   value="0.10-vos"/>
   <property name="lib.name"      value="dalserver"/>
   <property name="build.home"    value="${basedir}/build"/>
   <property name="config.home"    value="${basedir}/config"/>
@@ -36,7 +36,7 @@
   <target name="app-prop" depends="-app-prop-specified,-app-prop-default">
     <property name="app.path" value="/${app.name}"/>
     <property name="db.jdbc.url" value="jdbc:${db.ms.type}://localhost:3306/"/>
-    <property name="db.jdbc.driver" value="com.mysql.jdbc.Driver"/>
+    <property name="db.jdbc.driver" value="org.postgresql.Driver"/>
     <property name="app.war" value="${app.name}.war"/>
   </target>
   <target name="-app-prop-specified" if="app.home">
@@ -49,7 +49,7 @@
   </target>
   <target name="-app-prop-default" unless="app.home">
     <property name="app.name" value="ivoa-dal"/>
-    <property name="app.version"   value="0.7-sia2dev"/>
+    <property name="app.version"   value="0.10-vos"/>
     <property name="app.dist" value="${dist.home}"/>
     <property name="app.build" value="${build.home}"/>
   </target>
@@ -81,12 +81,7 @@
   <property name="texttable.jar" value="${basedir}/lib/texttable.jar"/>
   <property name="fits.jar" value="${basedir}/lib/nom-tam-fits-1.11.jar"/>
   <property name="nom.tam.fits.jar" value="${basedir}/lib/nom-tam-fits-1.11.jar"/>
-  <property name="mysql-jdbc.jar"
-            value="${basedir}/lib/mysql-connector-java-5.1.26-bin.jar"/>
-  <property name="postgresql-jdbc.jar"
-            value="${basedir}/lib/postgresql-jdbc.jar"/>
-  <property name="oracle-jdbc.jar"
-            value="${basedir}/lib/ojdbc14.jar"/>
+  <property name="postgresql-jdbc.jar" value="${basedir}/lib/postgresql-jdbc.jar"/>
   <property name="junit.jar" value="${basedir}/lib/junit-4.8.1.jar"/>
   <property name="nekohtml.jar" value="${basedir}/lib/nekohtml.jar"/>
 
@@ -109,10 +104,7 @@
 	    value="${basedir}/lib/commons-dbcp-1.4.jar"/>
   <property name="commons-pool.jar"
 	    value="${basedir}/lib/commons-pool-1.6.jar"/>
-    <!--
-  <property name="tomcat-servlet-3.0-api.jar"
-	    value="${basedir}/lib/tomcat-servlet-3.0-api.jar"/>
-         -->
+<!-- <property name="servlet-api.jar" value="${basedir}/lib/servlet-api.jar"/>  -->
   <property name="javax.servlet.jar" value="${basedir}/lib/javax.servlet.jar"/>
   <property name="javacsv.jar" value="${basedir}/lib/javacsv.jar"/>
   <property name="jdom2.jar" value="${basedir}/lib/jdom2.jar"/>
@@ -139,9 +131,7 @@
     <pathelement location="${texttable.jar}"/>
     <pathelement location="${fits.jar}"/>
     <pathelement location="${nom.tam.fits.jar}"/>
-    <pathelement location="${mysql-jdbc.jar}"/>
     <pathelement location="${postgresql-jdbc.jar}"/>
-    <pathelement location="${oracle-jdbc.jar}"/>
     <pathelement location="${basedir}/lib/FITSWCS-2.4+dev.jar"/>
     <pathelement location="${basedir}/lib/horizon-data.jar"/>
 
@@ -158,9 +148,7 @@
     <pathelement location="${commons-cli.jar}"/>
     <pathelement location="${commons-dbcp.jar}"/>
     <pathelement location="${commons-pool.jar}"/>
-    <!--
-	-->
-    <pathelement location="${tomcat-servlet-3.0-api.jar}"/>
+<!-- <pathelement location="${servlet-api.jar}"/>  -->
     <pathelement location="${javax.servlet.jar}"/>
     <pathelement location="${javacsv.jar}"/>
     <pathelement location="${jdom2.jar}"/>
@@ -174,32 +162,16 @@
     <pathelement location="${xmlParserAPIs.jar}"/>
 
     <!-- Include all elements that Tomcat exposes to applications -->
-    <!-- Uncomment the following for Tomcat 6.
-	<fileset dir="${catalina.home}/bin">
-	  <include name="*.jar"/>
-	</fileset>
-	<pathelement location="${catalina.home}/lib"/>
-	<fileset dir="${catalina.home}/lib">
-	  <include name="*.jar"/>
-	</fileset>
-          -->
-
-    <!-- Uncomment the following for Tomcat 5.5.
-	<pathelement location="${catalina.home}/common/classes"/>
-	<fileset dir="${catalina.home}/common/endorsed">
-	  <include name="*.jar"/>
-	</fileset>
-	<fileset dir="${catalina.home}/common/lib">
-	  <include name="*.jar"/>
-	</fileset>
-	<pathelement location="${catalina.home}/shared/classes"/>
-	<fileset dir="${catalina.home}/shared/lib">
-	  <include name="*.jar"/>
-	</fileset>
-	<fileset dir="${catalina.home}/server/lib">
-	  <include name="*.jar"/>
-	</fileset>
-      -->
+    <!-- Uncomment the following for Tomcat 6+. -->
+    <!--
+    <fileset dir="${catalina.home}/bin">
+      <include name="*.jar"/>
+    </fileset>
+    <pathelement location="${catalina.home}/lib"/>
+    <fileset dir="${catalina.home}/lib">
+      <include name="*.jar"/>
+    </fileset>
+    -->
 
   </path>
 
@@ -219,17 +191,14 @@
   <target name="clean"
    description="Delete build directory">
     <delete dir="${build.home}"/>
-    <ant dir="${basedir}/prototype" antfile="build-loaddb.xml" 
-         target="clean" inheritall="false"/>
   </target>
-
 
 <!-- ==================== CleanAll Target ================================= -->
 
   <target name="cleanAll" depends="clean"
           description="Delete build and dist directories">
     <delete dir="${dist.home}"/>
-    <!-- <delete dir="${web.home}/README.txt"/> -->
+    <delete dir="${web.home}/README.txt"/>
     <delete dir="${web.home}/docs/javadoc"/>
   </target>
 
@@ -372,7 +341,7 @@
     <copy todir="${dist.home}">
       <fileset dir="${config.home}"/>
     </copy>
- 
+
     <!-- Copy additional files to ${dist.home} as necessary -->
 
   </target>
@@ -418,7 +387,7 @@
 	<arg value="-d"/>
 	<arg value="web/docs/javadoc"/>
 	<arg value="-classpath"/>
-	<arg value="${compile.classpath}"/> 
+	<arg value="${compile.classpath}"/>
 	<arg value="-sourcepath"/>
 	<arg value="src"/>
 	<arg value="dalserver"/>
@@ -487,9 +456,7 @@
     <copy todir="${build.home}/WEB-INF/lib" file="${cds-savot-3.0.jar}"/>
     <copy todir="${build.home}/WEB-INF/lib" file="${kxml2.jar}"/>
     <copy todir="${build.home}/WEB-INF/lib" file="${texttable.jar}"/>
-    <copy todir="${build.home}/WEB-INF/lib" file="${mysql-jdbc.jar}"/>
     <copy todir="${build.home}/WEB-INF/lib" file="${postgresql-jdbc.jar}"/>
-    <copy todir="${build.home}/WEB-INF/lib" file="${oracle-jdbc.jar}"/>
     <copy todir="${build.home}/WEB-INF/lib" file="${nom.tam.fits.jar}"/>
 
     <copy todir="${build.home}/WEB-INF/lib" file="${cadcDALI.jar}"/>
@@ -505,10 +472,8 @@
     <copy todir="${build.home}/WEB-INF/lib" file="${commons-cli.jar}"/>
     <copy todir="${build.home}/WEB-INF/lib" file="${commons-dbcp.jar}"/>
     <copy todir="${build.home}/WEB-INF/lib" file="${commons-pool.jar}"/>
-    <!--
-    <copy todir="${build.home}/WEB-INF/lib" file="${tomcat-servlet-3.0-api.jar}"/>
+<!-- <copy todir="${build.home}/WEB-INF/lib" file="${servlet-api.jar}"/>  -->
     <copy todir="${build.home}/WEB-INF/lib" file="${javax.servlet.jar}"/>
-         -->
     <copy todir="${build.home}/WEB-INF/lib" file="${javacsv.jar}"/>
     <copy todir="${build.home}/WEB-INF/lib" file="${jdom2.jar}"/>
     <copy todir="${build.home}/WEB-INF/lib" file="${jsqlparser.jar}"/>
@@ -532,7 +497,7 @@
 <!-- ==================== App Targets =================================== -->
 
     <target name="TapSchema" depends="compile">
-	<java classpathref="compile.classpath" 
+	<java classpathref="compile.classpath"
 	      classname="dalserver.tap.TapSchema"
 	      description="Create or update the TAP Schema">
 	    <arg line="${args}"/>
@@ -587,7 +552,7 @@
 
   <target name="app-load-table" depends="db-check"
           description="load the table file into a database">
-    <java classpathref="compile.classpath" 
+    <java classpathref="compile.classpath"
           classname="dalserver.conf.MySQLIngestTable">
       <arg value="${db.name}"/>
       <arg value="${db.table.name}"/>
@@ -627,9 +592,9 @@
 <!-- ==================== Targets for Release Packaging ================ -->
   <property name="build.ant.version" value="1.8.2"/>
   <property name="build.ant-contrib.version" value="1.0b3"/>
-  <property name="build.ant.zipfile" 
+  <property name="build.ant.zipfile"
             value="${basedir}/apache-ant-${build.ant.version}-bin.zip"/>
-  <property name="build.ant.home" 
+  <property name="build.ant.home"
             value="${basedir}/apache-ant-${build.ant.version}"/>
   <property name="build.ant.exec" location="${basedir}/ant"/>
 
@@ -651,44 +616,8 @@
          dest="${build.ant.zipfile}" usetimestamp="true" />
   </target>
 
-<!-- ==================== Targets for VAO Prototype ==================== -->
-
-  <target name="loaddb">
-    <ant dir="${basedir}/prototype" antfile="build-loaddb.xml" 
-         target="loaddb" inheritall="false"/>
-  </target>
-
-  <target name="dropdb">
-    <ant dir="${basedir}/prototype" antfile="build-loaddb.xml" 
-         target="dropdb" inheritall="false"/>
-  </target>
-
-  <target name="testdb" depends="compiletests">
-    <junit printsummary="yes"  includeAntRuntime="true" haltonfailure="yes">
-       <classpath refid="compile.tests.classpath" />
-       <formatter type="plain" />
-       <batchtest todir="${tests.reports}">
-         <fileset dir="${tclasses}">
-           <include name="**/*TestNeedsDb.class" />
-         </fileset>
-       </batchtest>
-       <sysproperty key="test.tmpdir" value="${tmp}"/>
-       <sysproperty key="test.protodir" value="${basedir}/prototype"/>
-       <sysproperty key="test.db.datafile" value="vocube.bar"/>
-       <syspropertyset>
-         <propertyref prefix="db"/>
-       </syspropertyset>
-    </junit>
-  </target>
-
-  <target name="try">
-    <ant dir="${basedir}/prototype" antfile="build-loaddb.xml" 
-         target="try" inheritall="false"/>
-  </target>
-
-  <target name="show">
+  <target name="show-test-classpath">
     <echo> test classpath: ${toString:compile.tests.classpath} </echo>
-
   </target>
 
 </project>
