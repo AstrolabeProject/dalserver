@@ -6,6 +6,7 @@
 /*.zip
 **/.gradle/
 /build/
+/dist/
 /SAVE/
 out
 dalserver.iml
