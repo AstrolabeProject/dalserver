@@ -49,7 +49,7 @@ public class Range implements Comparable<Range> {
      * @param	value1	For a ONEVAL, LOVAL, or HIVAL range, the single
      *			value, or for a CLOSED range, the first value.
      * @param	value2	The second value for a CLOSED range.
-     * @param	order	Swap the two values if value2 < value1.
+     * @param	order	Swap the two values if value2 is less than value1.
      * @param	isoDate	The range contains ISO date strings.
      */
     public Range (RangeType type, String value1, String value2,

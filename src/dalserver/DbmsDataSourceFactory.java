@@ -42,7 +42,7 @@ public class DbmsDataSourceFactory {
      *
      * In the case of a file-based DataSource, the JDBC connection parameters
      * are read from a Java properties file.  This case is indicated by a
-     * DataSource reference of the form "file:<path>", where <path> is the
+     * DataSource reference of the form {@literal file:<path>}, where 'path' is the
      * pathname of the Java properties file.  A new DataSource instance is
      * created with the specified properties.
      */

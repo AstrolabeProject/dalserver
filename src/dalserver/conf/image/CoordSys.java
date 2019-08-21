@@ -215,7 +215,7 @@ public class CoordSys {
      * convert galactic coordinates to J2000
      * @param lon   the galactic longitude of the position
      * @param lat   the galactic latitude of the position
-     * @param double[]  the right acension and declination as a 2-element array
+     * @return      the right acension and declination as a 2-element array
      */
     public static double[] gal2cel(double lon, double lat) {
         final int[] axes = { 0, 1 };
@@ -231,7 +231,7 @@ public class CoordSys {
      * convert galactic coordinates to J2000
      * @param lon   the galactic longitude of the position
      * @param lat   the galactic latitude of the position
-     * @param double[]  the right acension and declination as a 2-element array
+     * @return      the right acension and declination as a 2-element array
      */
     public static double[] b1950toJ2000(double lon, double lat) {
         final int[] axes = { 0, 1 };

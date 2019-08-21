@@ -96,7 +96,7 @@ public class DbColumns implements Iterable {
      * @return		Returns the parameter value as a String, or null
      *			if no parameter value is set.
      *
-     * @throws	DALServerException	If parameter is not found.
+     * @throws	DalServerException	If parameter is not found.
      */
     public String getValue(String name)
 	throws DalServerException {

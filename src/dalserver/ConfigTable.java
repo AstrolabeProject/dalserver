@@ -63,7 +63,7 @@ public class ConfigTable implements Iterable {
      * The input parameter set is normally the main input parameter set for
      * the calling servlet, but in principle it could be any parameter set
      * containing table config parameters.  The table config parameters are
-     * passed as a subgroup named "table.{standard|custom}.<param-name>"
+     * passed as a subgroup named {@literal table.(standard|custom).<param-name>}
      * within the input parameter set.
      */
     public

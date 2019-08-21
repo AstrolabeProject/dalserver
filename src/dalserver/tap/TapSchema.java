@@ -72,7 +72,7 @@ public class TapSchema {
      * tables.  The default is the VO standard value "tap_schema", however
      * other non-standad schema names may be used.
      *
-     * @param schemaName	The name of the schema to be used
+     * @param tapSchemaName	The name of the schema to be used
      */
     public void setTapSchema(String tapSchemaName) {
         this.tapSchemaName = tapSchemaName;
@@ -238,7 +238,7 @@ public class TapSchema {
      *
      * @param	schemaName	The schema containing the tables
      * @param	tableName	The name of the table to be added
-     * @param	description	A brief description of the table
+     * @param	desc	        A brief description of the table
      * @param	utype		The VO Utype for the table
      *
      * The given table is added to the currently active TAP_SCHEMA.
@@ -376,7 +376,7 @@ public class TapSchema {
      * is determined by the syntax of the "datasource" parameter.  For a
      * JNDI lookup merely specify the JNDI name of the object, e.g.,
      * "jdbc/tapuser".  To dynamically create a DataSource from connection
-     * parameters stored in a Java properties file, use "file:<path>".
+     * parameters stored in a Java properties file, use {@literal file:<path>}
      */
     public static void main(String args[]) {
 

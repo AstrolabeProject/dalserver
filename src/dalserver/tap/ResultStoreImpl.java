@@ -25,7 +25,6 @@ import org.apache.log4j.Logger;
  * and then returns a URL to that file. The filesystem-to-URL mapping is
  * configurable via two parameters passed via the service configuration.
  *
- * </p>
  * <ul>
  * <li>baseStorageDir=/path/to/storage
  * <li>baseURL=http://hostname/storage

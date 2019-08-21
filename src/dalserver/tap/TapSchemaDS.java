@@ -145,11 +145,14 @@ public class TapSchemaDS
      * mechanism, this class will attempt to load a subclass and delegate to it. The
      * delegate class muct be named <code>ca.nrc.cadc.tap.schema.TapSchemaDSImpl</code>
      * and have a no-arg constructor.
-     * 
-     * @param dataSource TAP_SCHEMA DataSource.
      */
     public TapSchemaDS() { }
 
+    /**
+     * Set the DataSource to the given DataSource.
+     *
+     * @param dataSource TAP_SCHEMA DataSource.
+     */
     public void setDataSource(DataSource dataSource)
     {
         this.dataSource = dataSource;
@@ -230,7 +233,6 @@ public class TapSchemaDS
     /**
      * Append a where clause to the query that selects from the specified table.
      * The default impl does nothing (returns in the provided SQL as-is).
-     * </p>
      * <p>
      * If you want to implement some additional conditions, such as having private columns
      * only visible to certain authenticated and authorized users, you can append some

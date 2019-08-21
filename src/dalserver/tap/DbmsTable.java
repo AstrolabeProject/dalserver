@@ -170,8 +170,8 @@ public class DbmsTable {
      *
      * @param	schemaName	The schema containing the table
      * @param	tableName	The table to be queried
-     * @param	where		The WHERE clause (default none)
-     * @returns			The number of rows in the resultSet
+     * @param	whereClause	The WHERE clause (default none)
+     * @return			The number of rows in the resultSet
      *
      * This is used to perform a single query of a single table without
      * having to compose the SQL for the query, or form a fully-qualified
@@ -232,7 +232,7 @@ public class DbmsTable {
      * @param	rs		A JDBC ResultSet, e.g., from a query
      * @param	schemaName	Schema name within DataSource context
      * @param	tableName	Table name within the schema
-     * @param	desc		A brief description of the table, or null
+     * @param	descr		A brief description of the table, or null
      * @param	utype		The VO Utype for the table, or null
      *
      * The schema for the new table will be automatically determined from the
@@ -387,7 +387,7 @@ public class DbmsTable {
      * @param	data		Row data
      *
      * Row data is passed as a List of rows, where each row is expressed as
-     * List<Object>.  Each Object data instance must match the datatype
+     * {@literal List<Object>}.  Each Object data instance must match the datatype
      * required by the table column.
      */
     public void insertData(String schemaName, String tableName,
@@ -489,7 +489,7 @@ public class DbmsTable {
      * @param	rs		A JDBC ResultSet, e.g., from a query
      * @param	schemaName	Schema name within DataSource context
      * @param	tableName	Table name within the schema
-     * @param	desc		A brief description of the table, or null
+     * @param	descr		A brief description of the table, or null
      * @param	utype		The VO Utype for the table, or null
      *
      * A basic table descriptor (TableDesc) instance is generated from the
@@ -542,7 +542,7 @@ public class DbmsTable {
      *
      * @param	schemaName	Schema name within DataSource context
      * @param	tableName	Table name within the schema
-     * @param	desc		A brief description of the table, or null
+     * @param	descr		A brief description of the table, or null
      * @param	utype		The VO Utype for the table, or null
      *
      * A basic table descriptor (TableDesc) instance is generated from the
@@ -608,7 +608,7 @@ public class DbmsTable {
     /**
      * Map a JDBC datatype to an ADQL datatype.
      *
-     * @param type		The input JDBC type.
+     * @param jdbcType		The input JDBC type.
      */
     public String getAdqlType(int jdbcType) {
 	String adqlType;

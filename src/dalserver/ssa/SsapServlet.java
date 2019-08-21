@@ -126,7 +126,7 @@ public class SsapServlet extends HttpServlet {
     protected String tableName;
 
     /**
-     * The JDBC URL of the database server, e.g., "jdbc:mysql://<host>:3306/".
+     * The JDBC URL of the database server, e.g., {@literal jdbc:mysql://<host>:3306/}
      */
     protected String jdbcUrl;
 

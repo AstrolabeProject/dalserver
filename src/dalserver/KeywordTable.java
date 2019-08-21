@@ -33,8 +33,8 @@ public class KeywordTable implements Iterable {
      * string containing multiple lines of text.  Each line must contain
      * a single keyword-value pair in the format "keyword = value" where
      * value extends to the end of the line.  Blank lines and comment
-     * lines are ignored.  Section context markers ("[<section>]") are 
-     * ignored at present.
+     * lines are ignored.  Section context markers {@literal [<section>]}
+     * are ignored at present.
      *
      * @param	text	The text to be processed.
      */
@@ -63,7 +63,7 @@ public class KeywordTable implements Iterable {
      * given input stream.  Each line must contain a single keyword-
      * value pair in the format "keyword = value" where value extends
      * to the end of the line.  Blank lines and comments lines are
-     * ignored.  Section context markers ("[<section>]") are ignored
+     * ignored.  Section context markers {@literal [<section>]} are ignored
      * at present.
      *
      * @param	reader	A BufferedReader for the stream to be read.
