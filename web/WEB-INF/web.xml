@@ -9,7 +9,7 @@
 
     <context-param>
       <param-name>webAppName</param-name>
-      <param-value>ivoa-dal</param-value>
+      <param-value>dals</param-value>
     </context-param>
     <context-param>
       <param-name>configDir</param-name>

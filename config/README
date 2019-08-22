@@ -4,7 +4,7 @@
 The files in this directory provide a working example of how to
 dyamically configure the DALServer framework for a local installation.
 
-    ivoa-dal.war	   This is a pre-built copy of the current 
+    dals.war	   This is a pre-built copy of the current
                            DALServer Web-app.
 
     server.conf            Root configuration file
@@ -29,7 +29,7 @@ assumes that you already have a Java applications server or servlet
 container (e.g., Apache Tomcat) installed on your system using the default
 configuration.
 
-    o   Copy the ivoa-dal.war file to your Web application directory.
+    o   Copy the dals.war file to your Web application directory.
 	This is the "webapps" subdirectory in the Tomcat root, also known
 	as $WEB_DEPLOY if you have the environment configured (or just use
 	the application server management Web UI, if available, to install
@@ -42,14 +42,14 @@ configuration.
 
     o	In your Web browser, go to:
 
-	    http://localhost:8080/ivoa-dal/reload
+	    http://localhost:8080/dals/reload
 
 	This should load all the service defined in the server.conf file
 	in your configuration directory.
 
     o   The provided test services should now be active and can be
 	accessed via their standard VO REST Web service interface.  The
-	page http://localhost:8080/ivoa-dal can also be used to try out
+	page http://localhost:8080/dals can also be used to try out
 	the included pre-built demonstration/test services.  Use these
 	to verify that things are working normally.
 
@@ -74,7 +74,7 @@ SCS and SIA Configurations
 --------------------------
 
 Services such as SCS (Simple Cone Search) and SIA (Simple Image Access)
-put database connection information directly in the "<service-name>.conf" 
+put database connection information directly in the "<service-name>.conf"
 file, e.g.
 
 For an SIA service:
@@ -130,7 +130,7 @@ where
     dec			Column containing Dec value (decimal degrees)
 
 [NOTE:  The use of a 'schemaName' field may depend on the type of database
-	used on the backend.  Values for all field must be set for the 
+	used on the backend.  Values for all field must be set for the
 	specific database, the above are simply examples.]
 
 
@@ -171,7 +171,7 @@ Add the following to the 'context.xml' file:
 
     The "<Context>" tag should already exist, you will need to add the
     "<ResourceLink>" tag to link the 'jdbc/tapuser' required by the TAP
-    service to the connection information in the "<Resource>" found in 
+    service to the connection information in the "<Resource>" found in
     the server.xml file.
 
 
@@ -212,7 +212,7 @@ Configuration Files
 -------------------
 
 The service configuration files are largely self-explanatory and contain
-inline comments where needed. 
+inline comments where needed.
 
 For details on the VO standards see:  http://www.ivoa.net/Documents/
 

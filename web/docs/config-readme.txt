@@ -10,11 +10,11 @@ containing a snapshot of my development configuration directory, for
 use as an example.]
 
 
-    ivoa-dal.war	   This is a pre-built copy of the DALServer Web-app.
+    dals.war            This is a pre-built copy of the DALServer Web-app.
 
-    server.conf            Root configuration file
-    <servlet>.conf         Configuration file for the named servlet
-    <servlet>.tab          Table config file for the servlet (optional)
+    server.conf         Root configuration file
+    <servlet>.conf      Configuration file for the named servlet
+    <servlet>.tab       Table config file for the servlet (optional)
 
 When the DALServer framework is told to reload the service configuration
 (there are various ways this can be triggered), it reads the root
@@ -34,7 +34,7 @@ assumes that you already have a Java applications server or servlet
 container (e.g., Apache Tomcat) installed on your system using the default
 configuration.
 
-    o   Copy the ivoa-dal.war file to your Web application directory.
+    o   Copy the dals.war file to your Web application directory.
 	This is the "webapps" subdirectory in the Tomcat root, also known
 	as $WEB_DEPLOY if you have the environment configured (or just use
 	the application server management Web UI, if available, to install
@@ -47,14 +47,14 @@ configuration.
 
     o	In your Web browser, go to:
 
-	    http://localhost:8080/ivoa-dal/reload
+	    http://localhost:8080/dals/reload
 
 	This should load all the servlets defined in the server.conf file
 	in your configuration directory.
 
     o   The provided test services should now be active and can be
 	accessed via their standard VO REST Web service interface.  The
-	page http://localhost:8080/ivoa-dal can also be used to try out the
+	page http://localhost:8080/dals can also be used to try out the
 	included pre-built demonstration/test servlets.  Use these to
 	verify that things are working normally [in the current development
 	version some of these are broken, i.e, not fully configured].

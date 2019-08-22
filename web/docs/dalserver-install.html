@@ -1,11 +1,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html><head>
 
-
-
-
-
-  
   <meta http-equiv="content-type" content="text/html; charset=UTF-8"><title>dalserver-install.html</title></head><body>
 <h1 style="color: black;">DALServer Installation Overview<br>
 </h1><p>The DALServer framework contains everything required to expose
@@ -45,9 +40,9 @@ The precompiled DALServer Web-app is installed as follows:<br>
 tarball</a> from this page.</li>
   <li>Unpack the tarball (unpacking to <span style="font-family: monospace;">/opt/services/dalserver</span> will
 simplify the installation).</li>
-  <li>Deploy the prebuilt DALServer Web-app <span style="font-family: monospace;">ivoa-dal.war</span> to the
+  <li>Deploy the prebuilt DALServer Web-app <span style="font-family: monospace;">dals.war</span> to the
 applications server (e.g., Tomcat).</li>
-  <li>Wait a few seconds, then bring up <a href="http://localhost:8080/ivoa-dal">http://localhost:8080/ivoa-dal </a>in
+  <li>Wait a few seconds, then bring up <a href="http://localhost:8080/dals">http://localhost:8080/dals </a>in
 a Web browser (a different URL may be required depending upon how the applications server was installed).</li>
 </ul>The browser should then display the DALServer administration
 console.&nbsp; At this point this is just a static Web page providing
@@ -72,7 +67,7 @@ modified configuration.&nbsp; The <a href="dalserver-config.html">Service Config
 </p>
 
 <p>
-Local configuration data is stored externally to the DALServer Webapp (<span style="font-family: monospace;">ivoa-dal.war</span>)
+Local configuration data is stored externally to the DALServer Webapp (<span style="font-family: monospace;">dals.war</span>)
 to ensure that it is not lost when a new version of the Webapp is
 installed. By default local configuration data is stored in the
 directory "<span style="font-family: monospace;">/opt/services/dalserver</span>"
@@ -120,8 +115,8 @@ whenever a new version of the DALServer Webapp is installed.&nbsp;<span style="f
 on port 8080 on the localhost, visit the following URL:<br>
 </p>
 
-<div style="margin-left: 40px;"><a href="http://localhost:8080/ivoa-dal/reload">
-http://localhost:8080/ivoa-dal/reload</a></div>
+<div style="margin-left: 40px;"><a href="http://localhost:8080/dals/reload">
+http://localhost:8080/dals/reload</a></div>
 
 <p>Note the application server must have read permission on the
 configuration directory for this to work.&nbsp; If
@@ -147,7 +142,7 @@ advanced services.&nbsp; DALServer is a Java Webapp; it is
 self-contained and uses Ant as the
 build tool.&nbsp; The details of how DALServer works internally and can
 be extended are beyond the scope of what we can cover here, however the
-<a href="http://localhost:8080/ivoa-dal/javadoc/">DALServer Javadoc</a>
+<a href="http://localhost:8080/dals/javadoc/">DALServer Javadoc</a>
 built into every running DALServer instance describes the DALServer
 classes.<br>
 

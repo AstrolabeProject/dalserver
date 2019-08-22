@@ -39,7 +39,7 @@ Installation
 To install DALServer, merely download the DALServer distribution tarball
 from the Web, unpack it (unpacking to /opt/services/dalserver would
 simplify things later, but is not required) and deploy the provided
-"ivoa-dal.war" app file to your local application server, e.g., Tomcat.
+"dals.war" app file to your local application server, e.g., Tomcat.
 How a Web-app is deployed depends upon the application server, but this
 is typically done using the administration Web GUI of the application
 server, or by merely copying the Web-app file to the "webapps" directory
@@ -49,9 +49,9 @@ automatically deployed and available for use.
 The DALServer console Web-UI should then be available at the following
 URL:
 
-    http://<host>[:<port]/ivoa-dal
+    http://<host>[:<port]/dals
 
-e.g., http://localhost:8080/ivoa-dal would work for the usual case where
+e.g., http://localhost:8080/dals would work for the usual case where
 the application server is running on the local host computer on the
 default port, 8080.
 
@@ -70,7 +70,7 @@ configuration text files, typically be copying and modifying an existing
 configuration or a template file.
 
 Local configuration data is stored externally to the DALServer Webapp
-(ivoa-dal.war) to ensure that it is not lost when a new version of the
+(dals.war) to ensure that it is not lost when a new version of the
 Webapp is installed.  By default local configuration data is stored in
 the directory "/opt/services/dalserver" on the server running the Java
 application server (refer to the instructions given in the detailed
@@ -106,27 +106,43 @@ resource is used to reload the local configuration (for all service
 instances) [note - we need to add login/password authentication to
 prevent unauthorized use of reload].  For example,
 
-    http://localhost:8080/ivoa-dal/reload
+    http://localhost:8080/dals/reload
 
 A reload should be performed whenever the configuration changes or
 whenever a new version of the DALServer Web-app is installed.  If
 "reload" executes successfully it prints a summary of the new service
 configuration, e.g.:
 
-    WebApp: DALServer Framework Test Configuration
+    WebApp: Astrolabe VO Server (DALServer)
+      7 Webapp system params, 20 DALServer global params
 
-    reload		0 parameters
-    scs-messier		12 parameters
-    siap-null		3 parameters
-    ssap-null		3 parameters
-    scsVaoImage		14 parameters tableconfig
-    scs-vlafirst	13 parameters
-    siapv2-vlafirst	18 parameters tableconfig
-    siapv1-vlafirst	18 parameters tableconfig
-    siapv2-vao		20 parameters tableconfig
+    reload		config service with 3 parameters
+      reload	        servlet with 0 parameters
+    scs-messier	        scs service with 13 parameters
+      scs-messier	servlet with 2 parameters
+    siap		siap service with 6 parameters
+      siap		servlet with 0 parameters
+    ssap-null	        ssa service with 4 parameters
+      ssap		servlet with 0 parameters
+    scs-vos		scs service with 5 parameters tableconfig
+      scs-vos	        servlet with 0 parameters
+    siav1-vos	        sia service with 6 parameters tableconfig
+      siav1-vos	        servlet with 0 parameters
+    siav2-vos	        sia service with 5 parameters
+      siav2-vos	        servlet with 0 parameters
+    tap-vos		tap service with 12 parameters
+      SyncServlet	servlet with 3 parameters
+      AsyncServlet	servlet with 2 parameters
+      CapServlet	servlet with 4 parameters
+      AvailabilityServlet  servlet with 1 parameters
+      TableServlet	servlet with 0 parameters
+    pluginFactory	global pset with 8 properties
+    resultStoreImpl	global pset with 4 properties
 
-    Successfully created 9 servlets
-    2014/08/21 15:12:16
+    Successfully created 8 services and 12 servlets
+    Successfully created 2 global property files
+    Successfully copied 0 files
+    2019/08/16 18:17:02
 
 More detailed instructions for configuring new services are given in the
 DALServer documentation.
@@ -142,7 +158,7 @@ Custom Extensions
 ------------------
 
 [TBA - Basically, install the source, modify or extend as desired, and
-rebuild using Java Ant.  The prebuilt ivoa-dal.war includes full Javadoc
+rebuild using Java Ant.  The prebuilt dals.war includes full Javadoc
 documentation for the DALServer classes.  Note, a custom build is not
 required for normal use of DALServer.]
 
