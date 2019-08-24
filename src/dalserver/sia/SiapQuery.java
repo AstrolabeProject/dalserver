@@ -35,9 +35,7 @@ public class SiapQuery extends DbmsQuery {
     /** Constructor to generate a new DBMS query object, providing
      * the functionality to query a remote DBMS-hosted catalog.
      */
-    public SiapQuery(String dbType, String jdbcDriver)
-	throws DalServerException {
-
+    public SiapQuery(String dbType, String jdbcDriver) throws DalServerException {
 	super(dbType, jdbcDriver);
     }
 
@@ -270,7 +268,6 @@ public class SiapQuery extends DbmsQuery {
 	String query = "".format("SELECT %s FROM %s WHERE (%s = '%s')",
 	    sqlName(attribute), tableName, sqlName("id"), id);
 
-System.err.println ("queryDataset(): '" + query + "'\n");
 	// Perform the data query and write rows to the output table.
 	try {
 	    // Execute the query.
@@ -298,8 +295,7 @@ System.err.println ("queryDataset(): '" + query + "'\n");
      *
      * @param	response	The request response object.
      */
-    public void
-    query(SiapService siap, SiapParamSet params, RequestResponse response)
+    public void query(SiapService siap, SiapParamSet params, RequestResponse response)
 	throws DalServerException, DalOverflowException {
 
 	String tableName="siav2model";		// default
@@ -500,8 +496,6 @@ System.err.println ("queryDataset(): '" + query + "'\n");
 		poly += ra2 + ", " + dec2 + ", ";		// UR
 		poly += ra1 + ", " + dec2       ;		// UL
 		poly += " }";
-System.err.println ("query(): poly: '" + poly + "'\n");
-
 
 	    // This needs to be generalized to allow for a spatial position
 	    // specified as NULL, e.g, for theory data.
@@ -752,22 +746,19 @@ System.err.println ("query(): poly: '" + poly + "'\n");
 
 	// Perform the data query and write rows to the output table.
 	//-------------------------------------------------------------
-	ResultSetMetaData md;
+//	ResultSetMetaData md;
 	ResultSet rs;
 	Statement st;
 	String key;
 
-System.err.println ("query(): '" + query + "'\n");
 	try {
 	    // Execute the query.
-	    //String null_query = "SELECT * FROM " +
-	    //	tableName + " WHERE (" + sqlName("id") + " = 0);";
 	    String null_query = "SELECT * FROM " + tableName + " LIMIT 1;";
 
 	    response.addInfo(key="QUERY", new TableInfo(key, query));
 	    st = conn.createStatement();
 	    rs = st.executeQuery((maxrec > 0) ? query : null_query);
-	    md = rs.getMetaData();
+//	    md = rs.getMetaData();
 
 	    // Walk through the resultset and output each row.
 	    int recnum = (maxrec > 0) ? maxrec : 1;
@@ -784,7 +775,6 @@ System.err.println ("query(): '" + query + "'\n");
 		// that do not satisfy the spatial constraint.  We do a
 		// more rigorous test here as a second pass.
 
-/**/
 		if (spatial_constraint) {
 		    obj_ra = rs.getDouble(s1Column);
 		    obj_dec = rs.getDouble(s2Column);
@@ -824,7 +814,6 @@ System.err.println ("query(): '" + query + "'\n");
 		    if (dec_dist > dec_offset)
 			continue;
 		}
-/**/
 
 		// Output a record for each matched image format.  There is
 		// one archival image, but there may be several virtual
@@ -922,11 +911,10 @@ System.err.println ("query(): '" + query + "'\n");
      *
      * The PubDID of the dataset is returned as the function value.
      */
-    private String
-    setMetadata (SiapParamSet params,
-	ResultSet rs, RequestResponse r, String format)
-	throws DalServerException {
-
+    private String setMetadata (SiapParamSet params, ResultSet rs,
+                                RequestResponse r, String format)
+      throws DalServerException
+    {
 	String sval = null;
 
 	/*
@@ -1150,9 +1138,9 @@ System.err.println ("query(): '" + query + "'\n");
      * image definition was successful, otherwise -1 is returned.
      */
     private int editVirtualImage (SiapService siap, String pubDID,
-	SiapParamSet params, RequestResponse response)
-	throws DalServerException {
-
+                                  SiapParamSet params, RequestResponse response)
+	throws DalServerException
+    {
 	RequestResponse r = response;
 	String imagefile;
 	URL fileURL;
