@@ -24,16 +24,30 @@ description =
 
 # Omit the following fields as these are not used.
 # ---------------------------------------------------------------------------
-# obs_creator_did	omit
-obs_creation_date       omit
-# obs_dataset_did	omit
+dataproduct_subtype     omit
+dataset_length          omit
+em_min                  omit
+em_max                  omit
+em_resolution           omit
+em_res_power            omit
 equinox                 omit
-# facility_name           omit
-# im_scale                omit
+o_unit                  omit
+obs_bandpass            omit
+obs_creator_did         omit
+obs_creation_date       omit
+obs_dataset_did	        omit
+obs_datasource	        omit
+obs_release_date        omit
+obs_title               omit
+pol_ucd                 omit
+pol_states              omit
+proposal_id             omit
 s_fov                   omit
 s_region                omit
 t_resolution            omit
 t_xel                   omit
+target_class            omit
+s_calib_status          omit
 
 # Some common extension metadata not included in the core Image table.
 # Just uncomment a field if it is provided.
