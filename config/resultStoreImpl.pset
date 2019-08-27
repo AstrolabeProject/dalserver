@@ -8,5 +8,5 @@
 pset-name = ResultStoreImpl
 description = Configuration for the file-based ResultStore plugin
 
-baseDir = /data/test/docroot/resultStoreImpl/
-baseURL = http://localhost/resultStoreImpl/
+baseDir = /data/vos/resultStore/
+baseURL = http://localhost:8080/dals/resultStore/
