@@ -946,7 +946,8 @@ public class SiapQuery extends DbmsQuery {
 	publisherDID += tableName + ":" + datasetID;
 
 	String runId = params.getValue("RunID");
-	String sync = "/sync";
+        // String sync = (this.version == 1) ? "" : "/sync";
+	String sync = "";
 
 	String serviceName = params.getValue("serviceName");
 	String baseUrl = params.getValue("baseUrl");
@@ -984,7 +985,6 @@ public class SiapQuery extends DbmsQuery {
 	} else {
 
 	    // AccessData is always SIAV2 even if called by SIAV1.
-	    // String sync = (this.version == 1) ? "" : "/sync";
 	    if (serviceName == null || baseUrl == null)
 	        throw new DalServerException("missing serviceName or baseUrl parameter");
 
