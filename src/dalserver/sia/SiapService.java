@@ -1,8 +1,3 @@
-/*
- * SiapService.java
- * $ID*
- */
-
 package dalserver.sia;
 
 import java.io.*;
@@ -19,16 +14,16 @@ import dalserver.sia.*;
  * service, independent of the transport protocol (HTTP).
  *
  * To configure a data service for an Image data collection, an Image
- * table (DBMS table) describing each image dataset is required.  The
+ * table (DBMS table) describing each image dataset is required. The
  * generic SIA service implementation uses this metadata to service discovery
- * queries and access image datasets.  An additional Image Data table
+ * queries and access image datasets. An additional Image Data table
  * may optionally be provided containing metadata describing the data
- * element(s) of the image (image geometry, WCS, etc.).  Finally the data
+ * element(s) of the image (image geometry, WCS, etc.). Finally the data
  * service instance must be configured via the DALServer service configuration
  * mechanism.
  *
  * In most cases this purely data-driven approach will be sufficient to
- * provide a SIA service for an Image data collection.  In more advanced
+ * provide a SIA service for an Image data collection. In more advanced
  * cases it is possible to subclass the methods of the generic SIA service
  * to provide customized functionality.
  */
@@ -47,55 +42,58 @@ public class SiapService {
     protected String serviceClass = "siap";
 
     /** The service or protocol version. */
-    protected String serviceVersion;
+    protected String serviceVersion = "2.0";
 
     /** The minor service version (for custom services). */
     protected String minorVersion = "generic";
 
     /** The type of DBMS to be accessed, if any. */
-    protected String dbType;
+    protected String dbType = null;
 
     /** The name of the database to be accessed. */
-    protected String dbName;
+    protected String dbName = null;
 
     /** The name of the schema to be accessed (for the SIAP metadata). */
-    protected String schemaName;
+    protected String schemaName = null;
 
     /** The name of the table to be accessed (for the SIAP metadata). */
-    protected String tableName;
+    protected String tableName = null;
 
     /** The JDBC URL (endpoint) of the DBMS. */
-    protected String jdbcUrl;
+    protected String jdbcUrl = null;
 
     /** The JDBC driver to be used for the connection. */
-    protected String jdbcDriver;
+    protected String jdbcDriver = null;
 
     /** The user name to use to login to the DBMS. */
-    private String dbUser;
+    private String dbUser = null;
 
     /** The user password to use to login to the DBMS. */
-    private String dbPassword;
+    private String dbPassword = null;
 
     /** Local directory where configuration files are stored. */
-    protected String configDir;
+    protected String configDir = "/tmp";
 
     /** Local directory where data files are stored. */
-    protected String dataDirURL;
+    protected String dataDirURL = "/tmp";
 
     /** Local directory where dynamically generated images are stored. */
-    protected String stagingDir;
+    protected String stagingDir = "/tmp";
 
     /** File content (MIME) type of any returned datasets. */
-    protected String contentType;
+    protected String contentType = "image/fits";
 
     /** File pathname of the vocutout task. */
     protected String cutoutTask;
 
     /** Tasking daemon name. */
-    protected String tdName;
+    protected String tdName = "localhost";
 
     /** Tasking daemon location. */
-    protected String tdLocation;
+    protected String tdLocation = null;
+
+    /** The name of the database field holding the archiveId value. */
+    protected String archiveIdField = "archive_id";
 
     /** MDFILE name if accessing a virtual image dataset. */
     protected String mdfile;
@@ -114,23 +112,7 @@ public class SiapService {
      */
     public SiapService(SiapParamSet params, TaskManager taskman) {
 	this.taskman = taskman;
-
-	if (params == null) {
-	    this.serviceName = "siap";
-	    this.serviceClass = "siap";
-	    this.serviceVersion = "1.0";
-	    this.minorVersion = "generic";
-            this.dbType = null;
-            this.dbName = null;
-            this.schemaName = null;
-            this.tableName = null;
-	    this.tdName = "localhost";
-	    this.tdLocation = null;
-	    this.configDir = "/tmp";
-	    this.dataDirURL = "/tmp";
-	    this.contentType = "image/fits";
-
-	} else {
+	if (params != null) {
 	    this.serviceName = params.getValue("serviceName");
 	    this.serviceClass = params.getValue("serviceClass");
 	    this.serviceVersion = params.getValue("serviceVersion");
@@ -150,12 +132,14 @@ public class SiapService {
 	    this.stagingDir = params.getValue("stagingDir");
 	    this.cutoutTask = params.getValue("cutoutTask");
 	    this.contentType = params.getValue("contentType");
+	    this.archiveIdField = params.getValue("archiveIdField");
 	}
     }
 
+
     /**
      * Process a data query and generate a list of candidate image
-     * datasets matching the query parameters.  The datasets referenced
+     * datasets matching the query parameters. The datasets referenced
      * in the query response may be physical datasets, or virtual datasets
      * which will be generated on demand, only if subsequently requested
      * by the client.
@@ -164,13 +148,12 @@ public class SiapService {
      *			  the request to be processed.
      *
      * @param	response  A dalserver request response object to which the
-     *			  query response should be written.  Note this is
+     *			  query response should be written. Note this is
      *			  not a file, but an object containing the metadata
      *			  to be returned to the client.
      */
     @SuppressWarnings("unchecked")
-    public void
-    queryData(SiapParamSet params, RequestResponse response)
+    public void queryData (SiapParamSet params, RequestResponse response)
 	throws DalServerException {
 
 	RequestResponse r = response;
@@ -182,7 +165,7 @@ public class SiapService {
 	String id, key;
 
 	// The "collection" parameter may be set to the value "none"
-	// to cause a built-in test / null query to be executed.  Otherwise
+	// to cause a built-in test / null query to be executed. Otherwise
 	// the configured data service executes normally.
 
 	Param cp = params.getParam("Collection");
@@ -199,7 +182,7 @@ public class SiapService {
 	    this.serviceVersion + " (" + this.minorVersion + ")");
 	r.setType("results");
 
-	// This indicates the query executed successfully.  If an exception
+	// This indicates the query executed successfully. If an exception
 	// occurs the output we generate here will never be returned anyway,
 	// so OK is always appropriate here.
 
@@ -265,7 +248,6 @@ public class SiapService {
 		    dbms.addFields(params, response);
 
 		    // Execute the SIAP query.
-		    //
 		    dbms.query(this, params, response);
 
 		} catch (DalOverflowException ex) {
@@ -290,14 +272,14 @@ public class SiapService {
 	    new TableInfo(key, new Integer(r.size()).toString()));
 
 	// We are done once the information content of the query response
-	// is fully specified.  The servlet code will take care of serializing
+	// is fully specified. The servlet code will take care of serializing
 	// the query response as a VOTable, and anything else required.
     }
 
 
     /**
      * Directly access an individual image dataset, returning an image
-     * or image subset to the client.  The MODE parameter determines
+     * or image subset to the client. The MODE parameter determines
      * whether an archival dataset is returned, or a virtual image is
      * generated and returned.
      *
@@ -310,12 +292,12 @@ public class SiapService {
      *
      * In cases where an existing archival or virtual dataset is to be
      * returned the dataset is specified by the PubDID parameter in the
-     * input request.  The value of PubDID is an IVOA dataset identifier
+     * input request. The value of PubDID is an IVOA dataset identifier
      * as returned in an earlier call to the queryData operation.
      *
      * The interpretation of PubDID and how it is used is up to the service.
      * In a simple case it provides a key which can be used to retrieve an
-     * archival dataset.  In another case, the service might generate a
+     * archival dataset. In another case, the service might generate a
      * unique PubDID on the fly for each virtual dataset described in the
      * query response (e.g., for a cutout or other virtual dataset), either
      * building sufficient information into the PubDID (and hence the URL)
@@ -325,25 +307,24 @@ public class SiapService {
      * is subsequently requested by the client.
      *
      * @param	params	The fully processed SIAP parameter set representing
-     *			the request to be processed.  Upon output the
+     *			the request to be processed. Upon output the
      *			parameters datasetContentType, datasetContentLength
      *			and datasetContentDisposition are added to specify
      *			the content (MIME) type of the dataset to be returned,
      *			and the size of the data entity to be returned, if
-     *			known.  Since data entities may be dynamically
+     *			known. Since data entities may be dynamically
      *			computed or may be dynamic streams, the content
      *			length is not always known in advance, in which
      *			case the value should be set to null.
      *
-     * @param response  A request response object.  Not currently used.
+     * @param response  A request response object. Not currently used.
      *
      * @return		An InputStream is returned which can be can be used
      *			read the dataset as a byte stream; it is
      *			up to the caller to close the returned stream when
      *			the data has been read.
      */
-    public InputStream
-    accessData(SiapParamSet params, RequestResponse response)
+    public InputStream accessData (SiapParamSet params, RequestResponse response)
 	throws DalServerException {
 
 	String imagefile=null, imageURL;
@@ -372,7 +353,7 @@ public class SiapService {
 	// Get the imagefile URL or virtual image MDFILE name from PubDID.
 	// If a non-null imageURL is returned the referenced file is to be
 	// returned, otherwise the the virtual image specified by this.mdfile
-	// is to be generated and returned.  Has the side affect of writing
+	// is to be generated and returned. Has the side affect of writing
 	// this.mdfile in the latter case.
 
 	this.mdfile = null;
@@ -432,8 +413,8 @@ public class SiapService {
 	    }
 	}
 
-	// Stream the image back to the client.  In the simplest case this
-	// is a static archival image.  In the more complex case it is a 
+	// Stream the image back to the client. In the simplest case this
+	// is a static archival image. In the more complex case it is a
 	// virtual image which has been generated and written to the staging
 	// area.
 
@@ -453,14 +434,14 @@ public class SiapService {
 	    if (imagefile == null)
 		throw new DalServerException("accessData: imagefile null");
 
-	    // Check for a GZIP compressed file.  The given imagefile name
-	    // can't be trusted, and may or may not end with ".gz".  So strip
+	    // Check for a GZIP compressed file. The given imagefile name
+	    // can't be trusted, and may or may not end with ".gz". So strip
 	    // the ".gz" if any, and check for an actual file with and without
-	    // the extension.  For the file to be recognized as GZIPed the
+	    // the extension. For the file to be recognized as GZIPed the
 	    // actual file must have a ".gz" extension.
 	    //
 	    // By default only uncompressed datasets are returned to the
-	    // client.  The COMPRESS parameter may be used to enable return
+	    // client. The COMPRESS parameter may be used to enable return
 	    // of compressed dataset files.
 
 	    String filePath = imagefile;
@@ -542,7 +523,7 @@ public class SiapService {
 	    EnumSet.of(ParamType.STRING), file.getName(),
 	    ParamLevel.SERVICE, false, "Content disposition or filename"));
 
-	// Return an InputStream to stream the dataset out.  If we are
+	// Return an InputStream to stream the dataset out. If we are
 	// accessing a GZIPed file then it is uncompressed on the fly.
 
 	try {
@@ -560,15 +541,14 @@ public class SiapService {
 
 
     /**
-     * Clean up after a call to accessData.  This is used to close the
+     * Clean up after a call to accessData. This is used to close the
      * InputStream returned by a prior call to accessData (passed as the
      * function value), as well as any other resources used internally
      * by accessData.
      *
      * @param	in		InputStream to be closed
      */
-    public void
-    accessDataClose (InputStream in) {
+    public void accessDataClose (InputStream in) {
 	try {
 	    // Close the primary input stream.
 	    in.close();
@@ -590,10 +570,10 @@ public class SiapService {
     /**
      * Given an archival image and a set of filter parameters (POS, SIZE,
      * BAND, TIME, POL), compute the metadata for a virtual image
-     * corresponding to the given cutout.  The computed metadata is
+     * corresponding to the given cutout. The computed metadata is
      * returned in a KeywordTable object, and is also written to the
      * virtual image staging area to permit later creation and
-     * retrieval of the virtual image.  Only metadata values that differ
+     * retrieval of the virtual image. Only metadata values that differ
      * from the parent archival image are returned.
      *
      * @param	params		A SIAPV2 parameter set, from either
@@ -606,13 +586,12 @@ public class SiapService {
      *				reference from PubDID.
      *
      * @return			A KeywordTable object containing the
-     *				changed metadata.  A MDFILE is also written
+     *				changed metadata. A MDFILE is also written
      *				to the staging area to allow later generation
-     *				of the referenced virtual image.  NULL is
+     *				of the referenced virtual image. NULL is
      *				returned if an error occurs.
      */
-    public KeywordTable
-    defineVirtualImage (SiapParamSet params, String imagefile)
+    public KeywordTable defineVirtualImage (SiapParamSet params, String imagefile)
 	throws DalServerException {
 
 	boolean spatial_constraint = true;
@@ -675,7 +654,6 @@ public class SiapService {
         // TIME Coverage.
 	// ------------------
 	// omitted for now.
-
 	if (time_constraint) {
 	    ;
 	}
@@ -740,6 +718,9 @@ public class SiapService {
      * There are two cases here, a PubDID that references an archival
      * image via a DBMS index table, and a PubDID that references a
      * virtual image in the staging area via its MDFILE (metadata file).
+     * It is an archival image if the PubDID contains a ":id" field.
+     * That is {@literal #<mdfile>} for a virtual image reference, and
+     *  {@literal #<tableName>:<id>} for a reference to an archival image file.
      *
      * @param	siap		SiapQuery instance or null
      * @param	pubDid		Publisher dataset identifier
@@ -755,8 +736,7 @@ public class SiapService {
      * Otherwise (siap=null) a new instance and DBMS connection will be
      * created and closed when done.
      */
-    protected String
-    getImageURL (SiapQuery siap, String pubDid, boolean preview)
+    protected String getImageURL (SiapQuery siap, String pubDid, boolean preview)
 	throws DalServerException {
 
 	String tableName, archiveId=null, id;
@@ -764,20 +744,17 @@ public class SiapService {
 	boolean virtual = false;
 	int taboff;
 
-	// We have an archival image if #frag contains a ":id" field.
-	// The frag is "#<mdfile>" for a virtual image reference, or
+	// We have an archival image if #suffix contains a ":id" field.
+	// The suffix is "#<mdfile>" for a virtual image reference, or
 	// "#<tableName>:<id>" for a reference to an imagefile.
 
 	taboff = pubDid.lastIndexOf("#") + 1;
 	String imageref = pubDid.substring(taboff);
 	virtual = (imageref.lastIndexOf(':') < 0);
 
-	// Get dataset or its preview?
-	String archive_key = "archive_id";
-	if (this.minorVersion.equals("vao-fall2013"))
-	    archive_key = "archiveid";
+	// Reset the archiveId field name if preview is specified
 	if (preview)
-	    archive_key = "preview_id";
+	    archiveIdField = "preview_id";
 
 	if (virtual) {
 	    this.mdfile = imageref;
@@ -800,9 +777,11 @@ public class SiapService {
 		    siap.connect(jdbcUrl, dbName, dbUser, dbPassword);
 		}
 
-		archiveId = siap.queryDataset(tableName, id, archive_key);
+		archiveId = siap.queryDataset(tableName, id, archiveIdField);
 		if (archiveId == null)
-		    throw new DalServerException("missing ArchiveID value");
+		    throw new DalServerException(
+                        "Table '" + tableName + "' is missing an archive_id value in the '" +
+                        archiveIdField + "' field");
 
 	    } catch (Exception ex) {
 		error = ex;
@@ -833,10 +812,7 @@ public class SiapService {
      * The connection is opened the first time this is called, after which
      * the connection remains open for the lifetime of the servlet.
      */
-    private TaskManager
-    getTaskManager()
-        throws DalServerException {
-
+    private TaskManager getTaskManager() throws DalServerException {
 	// Initialize a new TaskManager connection.
 	if (taskman == null)
 	    taskman = new TaskManager();
@@ -855,10 +831,10 @@ public class SiapService {
 
     /**
      * Process a service metadata query, returning a description of the
-     * service to the client as a structured XML document.  In the generic
+     * service to the client as a structured XML document. In the generic
      * form this operation returns an InputStream to an actual file in
-     * the local file system on the server.  The file name is formed by
-     * concatenating the serviceName with "Capabilities.xml".  The file
+     * the local file system on the server. The file name is formed by
+     * concatenating the serviceName with "Capabilities.xml". The file
      * is assumed to be available in the directory specified when the
      * SiapService object was created, e.g., "path/myServiceCapabilities.xml".
      * More generally, the service capabilities do not have to be maintained
@@ -873,10 +849,7 @@ public class SiapService {
      *			It is up to the caller to close the returned stream
      *			when the data has been read.
      */
-    public InputStream
-    getCapabilities (SiapParamSet params)
-	throws FileNotFoundException {
-
+    public InputStream getCapabilities (SiapParamSet params) throws FileNotFoundException {
 	File capabilities = new File (this.configDir,
 	    this.serviceName + "Capabilities.xml");
 	return ((InputStream) new FileInputStream(capabilities));
@@ -888,7 +861,7 @@ public class SiapService {
     /**
      * Unit test to do a simple query.
      */
-    public static void main(String[] args)
+    public static void main (String[] args)
 	throws DalServerException, IOException, FileNotFoundException {
 
 	if (args.length == 0 || args[0].equals("query")) {
