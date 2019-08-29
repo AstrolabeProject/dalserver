@@ -6,7 +6,7 @@ MAINTAINER Tom Hicks <hickst@email.arizona.edu>
 #     && apt-get install -y --no-install-recommends XXX \
 #     && rm -rf /var/lib/apt/lists/*
 
-RUN mkdir -p /opt/services/dalserver
+RUN mkdir -p /opt/services/dalserver /data/vos/resultStore /data/vos/images /data/vos/staging
 COPY web/META-INF/context.xml web/META-INF/server.xml ${CATALINA_HOME}/conf/
 COPY dist/dals.war ${CATALINA_HOME}/webapps
 COPY config/* /opt/services/dalserver/
