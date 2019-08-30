@@ -1,4 +1,5 @@
 APP=dals
+IMGDIR = /vos/images
 JSRC = src/dalserver
 WARNAME = $(APP).war
 BUILDWAR = dist/$(WARNAME)
@@ -34,7 +35,7 @@ reset:
 	docker rm -f $(APP)
 
 run:
-	docker run -d --rm --name $(APP) -p 8080:8080 $(APP)
+	docker run -d --rm --name $(APP) -p 8080:8080 -v $(PWD)/images:/vos/images $(APP)
 
 war:
 	ant war
