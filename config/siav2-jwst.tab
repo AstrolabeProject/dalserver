@@ -6,7 +6,7 @@
 table-name = sia.jwst
 table-class = image.vao.mar2014
 description =
-    ObsCore-based SIAV2 Image table.
+    ObsCore-based SIA V2 service for the JWST Image table.
 
 
 [standard]

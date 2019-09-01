@@ -6,7 +6,7 @@
 table-name = sia.jwst
 table-class = image.vao.mar2014
 description =
-    ObsCore-based SCS Image table.
+    ObsCore-based SCS for the JWST Image table.
 
 [standard]
 
