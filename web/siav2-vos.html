@@ -1,238 +1,258 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html>
-<head>
+<HTML>
+  <HEAD>
+    <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+    <meta HTTP-EQUIV="Pragma" CONTENT="no-cache">
+    <meta HTTP-EQUIV="Expires" CONTENT="0">
 
-<meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
-<meta HTTP-EQUIV="Pragma" CONTENT="no-cache">
-<meta HTTP-EQUIV="Expires" CONTENT="0">
+    <style type="text/css">
+      A.leftmenu:link{color:#ffffff; text-decoration: none; font-weight: bold; font-size: 14px; }
+      A.leftmenu:visited{color:#ffffff; text-decoration: none; font-weight: bold; font-size: 14px; }
+      A.leftmenu:hover{color:#ffffff; text-decoration: underline; font-weight: bold; font-size: 14px; }
+      A.leftmenu2:link{color:#ffcccc; text-decoration: none; font-weight: bold; font-size: 14px; }
+      A.leftmenu2:visited{color:#ffcccc; text-decoration: none; font-weight: bold; font-size: 14px; }
+      A.leftmenu2:hover{color:#ffcccc; text-decoration: underline; font-weight: bold; font-size: 14px; }
+      A.navig:link{color:#0000cc; text-decoration: none; font-weight: normal; font-size: 14px; }
+      A.navig:visited{color:#0000cc; text-decoration: none; font-weight: normal; font-size: 14px; }
+      A.navig:hover{color:#ff0000; text-decoration: underline; font-weight: normal; font-size: 14px; }
 
-<style type="text/css">
+      body{font-family: Helvetica; font-size:14px;}
+      td{font-family: Helvetica; color: #000000; font-size: 14px; padding: 1 0;}
+      .datetime{font-family: Helvetica; color: #ffffff; font-size: 12px;}
+      .disabled{color: #7f7f7f;}
+      .inbox{margin-left: 4;}
+      .inbutton{font-family: Helvetica; font-size: 16px;}
+      .inradio{margin-left: 10;}
+      .legal{color: #7f7f7f; font-size:11px; margin: 0 0 0 5;}
+      .endtable{border: 0; border-style: none; border-spacing: 0;}
+      .maintbl{border: 0; border-style: none; border-spacing: 0; margin: 10 0 0 20;}
+      .toptbl{border: 0; border-style: none; border-spacing: 0;}
+    </style>
 
-    A.leftmenu:link{color:#ffffff; text-decoration: none; font-weight: bold; font-size: 14px; }
-    A.leftmenu:visited{color:#ffffff; text-decoration: none; font-weight: bold; font-size: 14px; }
-    A.leftmenu:hover{color:#ffffff; text-decoration: underline; font-weight: bold; font-size: 14px; }
+    <script language="Javascript" type="text/javascript">
+      var dayNames = new Array ();
+      dayNames[0]="Sunday";
+      dayNames[1]="Monday";
+      dayNames[2]="Tuesday";
+      dayNames[3]="Wednesday";
+      dayNames[4]="Thursday";
+      dayNames[5]="Friday";
+      dayNames[6]="Saturday";
 
-    A.leftmenu2:link{color:#ffcccc; text-decoration: none; font-weight: bold; font-size: 14px; }
-    A.leftmenu2:visited{color:#ffcccc; text-decoration: none; font-weight: bold; font-size: 14px; }
-    A.leftmenu2:hover{color:#ffcccc; text-decoration: underline; font-weight: bold; font-size: 14px; }
+      var monthNames = new Array ();
+      monthNames[0]="January";
+      monthNames[1]="February";
+      monthNames[2]="March";
+      monthNames[3]="April";
+      monthNames[4]="May";
+      monthNames[5]="June";
+      monthNames[6]="July";
+      monthNames[7]="August";
+      monthNames[8]="September";
+      monthNames[9]="October";
+      monthNames[10]="November";
+      monthNames[11]="December";
 
-    A.navig:link{color:#0000cc; text-decoration: none; font-weight: normal; font-size: 14px; }
-    A.navig:visited{color:#0000cc; text-decoration: none; font-weight: normal; font-size: 14px; }
-    A.navig:hover{color:#ff0000; text-decoration: underline; font-weight: normal; font-size: 14px; }
+      var now = new Date();
+      var day = now.getDay();
+      var month = now.getMonth();
+      var year = now.getFullYear();
+      var date = now.getDate();
+    </script>
 
-    body{font-family: Helvetica; font-size:14px;}
-    td{font-family: Helvetica; color: #000000; font-size: 14px;}
+    <title>ALVO SIA V2 Search </title>
+  </HEAD>
 
-</style>
+  <!-- ======================================================================= -->
+  <BODY bgcolor="#dfdfdf" text="#black">
 
-<script language="Javascript" type="text/javascript">
-
-    var dayNames = new Array ();
-	dayNames[0]="Sunday";
-	dayNames[1]="Monday";
-	dayNames[2]="Tuesday";
-	dayNames[3]="Wednesday";
-	dayNames[4]="Thursday";
-	dayNames[5]="Friday";
-	dayNames[6]="Saturday";
-
-    var monthNames = new Array ();
-	monthNames[0]="January";
-	monthNames[1]="February";
-	monthNames[2]="March";
-	monthNames[3]="April";
-	monthNames[4]="May";
-	monthNames[5]="June";
-	monthNames[6]="July";
-	monthNames[7]="August";
-	monthNames[8]="September";
-	monthNames[9]="October";
-	monthNames[10]="November";
-	monthNames[11]="December";
-
-    var now = new Date();
-    var day = now.getDay();
-    var month = now.getMonth();
-    var year = now.getFullYear();
-    var date = now.getDate();
-
-</script>
-
-<title>DALServer Demonstration/Test Queries (Wed 13:39) </title>
-
-</head>
-<body bgcolor="#dfdfdf">
-<TABLE width="100%" cellpadding=0 cellspacing=0 border=0 bgcolor="#000000">
-    <tr>
-	<td colspan=1 width="100%" height=50 align=left bgcolor="#003366">
-	  <a href="http://vaosa-vm1.aoc.nrao.edu/vo/dalserver">
-	  <img src="docs/images/dalserver-title.jpg" alt="dalserver" border=0>
+    <TABLE width="800" class="toptbl">
+      <tr>
+	<td colspan=1 width="100%" height="80" align="left" bgcolor="#dfdfdf">
+	  <a href="http://astrolabe.arizona.edu/">
+	    <img src="docs/images/AstrolabeStrip.jpg" alt="Astrolabe" border="0"
+                 height="80" width="100%">
 	  </a>
 	</td>
-	<td colspan=1 width="100%" height=50 align=right bgcolor="#aaaaaa">
-	  <a href="http://www.usvao.org">
-	  <img src="docs/images/VAO_logo_100.png" alt="vao" border=0>
-	  </a>
-	</td>
-    </tr>
-    <tr>
-	<td width="100%" colspan=2 height=5 align=right bgcolor="#000000">
-	    <font color="#ffffff" face=Helvetica size=-1>
+      </tr>
+      <tr>
+	<td width="100%" colspan=2 align="right" bgcolor="#000000">
+          <span class="datetime">
 	    <script language="Javascript" type="text/javascript">
-	    document.write(dayNames[day] + ", " + monthNames[month] + " ");
-	    document.write(date + ", " + year );
-	    document.write("&nbsp;");
+	      document.write(dayNames[day] + ", " + monthNames[month] + " ");
+	      document.write(date + ", " + year );
+	      document.write("&nbsp;");
 	    </script>
-	    </font>
+	  </span>
 	</td>
-    </tr>
-    <tr>
-	<td width="100%" colspan=2 height=20 align=left bgcolor="#cccccc" valign=middle></td>
-    </tr>
-</TABLE>
+      </tr>
+      <tr>
+	<td width="100%" colspan=2 height=10 align="left" bgcolor="#dfdfdf" valign="middle"></td>
+      </tr>
+    </TABLE>
 
+    <!-- ======================================================================= -->
+    <FONT face="helvetica,arial">
+      <TABLE align="left" width="750" class="maintbl">
+        <tr><td>
 
-<BODY BGCOLOR="#ffffff" TEXT="#000000">
-<FONT face="helvetica,arial">
+            <!-- ======================================================================= -->
+            <FORM ACTION="/dals/siav2-vos" METHOD="GET">
+              <INPUT type="hidden" name="REQUEST" value="queryData"></INPUT>
+              <INPUT type="hidden" name="VERSION" value="2.0"></INPUT>
 
-<!----------------------------------------------------------------------------->
-<TABLE align=left width=750 border=0 cellspacing=0 cellpadding=0>
-    <tr><td>
-	<table width="750" border=0>
-	    <TR><TD></TD></TR>
-	    <TR><TD></TD></TR>
-	</table>
-    </td></tr>
+              <tr><td>
+	          <TABLE width="100%" align="left" border="0">
+	            <tr>
+                      <td align="left"> <h2>Simple Image Access (SIA) V2 Service</h2> </td>
+	              <td align="right">(Astrolabe JWST data)</td></tr>
+	          </TABLE>
+              </td></tr>
+              <tr><td></td></tr>
 
-<!----------------------------------------------------------------------------->
-<FORM ACTION="/dals/siav2-vos" METHOD="GET">
-    <INPUT type="hidden" name="REQUEST" value="queryData"</INPUT>
-    <INPUT type="hidden" name="VERSION" value="2.0"</INPUT>
+              <tr><td>
+	          <TABLE width="100%"  align="left" border="0">
+	            <tr>
+                      <td align="left"> <b>Query Parameters:</b> </td>
+	              <td align="right">Debug: <INPUT type=checkbox name="Debug"/> </td>
+                    </tr>
+	          </TABLE>
+              </td></tr>
 
-    <tr><td> <hr noshade width="750" align="left" size=10> </td></tr>
-    <tr><td>
-	<TABLE width="750"  align="left" border=0>
-	    <tr><td> <h3 align=left><a name="siav2">SIAP V2 Service</a></h3> </td>
-	    <td align=right>(Astrolabe JWST data)</td></tr>
-	</TABLE>
-    </td></tr>
-    <tr><td> </td></tr>
+              <tr><td>
+	          <TABLE width="100%" align="left" border="0">
+	            <tr>
+		      <td align="right">POS ("RA,DEC" in degrees):</td>
+		      <td> <INPUT name="POS" class="inbox" size="20" value="53.14,-27.8"/> </td>
+		      <td align="right">SIZE (decimal degrees):</td>
+		      <td> <INPUT name="SIZE" class="inbox" size="20" value="0.2"/> </td>
+	            </tr>
+	            <tr>
+		      <td align="right">PUBDID (dataset ID): </td>
+		      <td> <INPUT name="PUBDID" class="inbox" size="20" value=""/> </td>
+	              <td align="right">TIME (ISO time):</td>
+		      <td> <INPUT name="TIME" class="inbox" size="20" value=""/> </td>
+	            </tr>
+                    <tr>
+                      <td align="right">SPATRES (min spatial resolution): </td>
+                      <td> <INPUT name="SPATRES" class="inbox" size="20" value=""/> </td>
+                      <td align="right">FOV (degrees):</td>
+                      <td> <INPUT name="FOV" class="inbox" size="20" value=""/> </td>
+                    </tr>
+                    <tr>
+                      <td align="right" class="disabled">DATA TYPE ("image|cube"): </td>
+                      <td> <INPUT name="DPTYPE" class="inbox" size="20" value="image" disabled/> </td>
+                      <td align="right" class="disabled">MODE ("archival|cutout|match"): </td>
+                      <td> <INPUT name="MODE" class="inbox" size="20" value="archival" disabled/> </td>
+                    </tr>
+                    <tr>
+                      <td align="right">FACILITY:</td>
+                      <td> <INPUT name="FACILITY" class="inbox" size="20" value=""/> </td>
+                      <td align="right">INSTRUMENT: </td>
+                      <td> <INPUT name="INSTRUMENT" class="inbox" size="20" value=""/> </td>
+                    </tr>
+	            <tr>
+                      <td align="right">BAND (meters):</td>
+                      <td> <INPUT name="BAND" class="inbox" size="20" value=""/> </td>
+	            </tr>
+	            <tr>
+		      <td align="right">MAXREC: </td>
+		      <td> <INPUT name="MAXREC" class="inbox" size="20" value=""/> </td>
+                      <td align="right">VERB (table verbosity 1,2,3):</td>
+                      <td> <INPUT name="VERB" class="inbox" size="20" value="3"/> </td>
+	            </tr>
+	          </TABLE>
+              </td></tr>
 
-    <tr><td>
-	<TABLE width="750"  align="left" border=0>
-	    <TR><TD align=left><b>Query Parameters</b> (Debug <INPUT type=checkbox NAME="Debug"/>) (<INPUT type=reset NAME="Reset"/>):</TD></TR>
-	</TABLE>
-    </td></tr>
+              <tr><td> <hr noshade width="100%" align="left" size=1> </td></tr>
 
-    <tr><td>
-	<TABLE WIDTH="750" ALIGN="LEFT" BORDER="0">
-	    <TR>
-		<TD ALIGN="RIGHT">POS ("ra,dec" in degrees):</TD>
-		<TD> <INPUT NAME="POS" SIZE="20" VALUE="53.14,-27.8"/> </TD>
-		<TD ALIGN="RIGHT">SIZE (decimal degrees):</TD>
-		<TD> <INPUT NAME="SIZE" SIZE="20" value="0.2"/> </TD>
-	    </TR>
-	    <TR>
-		<TD ALIGN="right">PUBDID (dataset ID): </TD>
-		<TD> <INPUT NAME="PUBDID" SIZE="20" VALUE=""/> </TD>
-	        <TD ALIGN="right">TIME (ISO time):</TD>
-		<TD> <INPUT NAME="TIME" SIZE="20" VALUE=""/> </TD>
-	    </TR>
-            <TR>
-               <TD ALIGN="right">SPATRES (min spatial resolution): </TD>
-               <TD> <INPUT NAME="SPATRES" SIZE="20" VALUE=""/> </TD>
-               <TD ALIGN="right">FOV (degrees):</TD>
-               <TD> <INPUT NAME="FOV" SIZE="20" VALUE=""/> </TD>
-            </TR>
-            <TR>
-               <TD ALIGN="right">DATA TYPE ("image|cube"): </TD>
-               <TD> <INPUT NAME="DPTYPE" SIZE="20" VALUE="image" disabled/> </TD>
-               <TD ALIGN="right">MODE ("archival|cutout|match"): </TD>
-               <TD> <INPUT NAME="MODE" SIZE="20" VALUE="archival" disabled/> </TD>
-            </TR>
-            <TR>
-               <TD ALIGN="right">FACILITY:</TD>
-               <TD> <INPUT NAME="FACILITY" SIZE="20" VALUE=""/> </TD>
-               <TD ALIGN="right">INSTRUMENT: </TD>
-               <TD> <INPUT NAME="INSTRUMENT" SIZE="20" VALUE=""/> </TD>
-            </TR>
-	    <TR>
-                <TD ALIGN="right">BAND (meters):</TD>
-                <TD> <INPUT NAME="BAND" SIZE="20" VALUE=""/> </TD>
-	    </TR>
-	    <TR>
-		<TD ALIGN="right">MAXREC: </TD>
-		<TD> <INPUT NAME="MAXREC" SIZE="20" VALUE=""/> </TD>
-                <TD ALIGN="RIGHT">VERB (table verbosity 1,2,3):</TD>
-                <TD> <INPUT NAME="VERB" SIZE="20" value="3"/> </TD>
-	    </TR>
-	</TABLE>
-    </td></tr>
+              <tr><td>
+	          <TABLE width="100%" align="left" border="0">
+	            <tr>
+                      <td align="left"><b>Image Data Collections: </b></td>
+	              <td align="left">
+		        <input type="radio" name="Collection" class="inradio"
+                               value="none">Null/Echo Test</input>
+		        <input type="radio" name="Collection" class="inradio"
+                               value="all">All</input>
+		        <input type="radio" name="Collection" class="inradio"
+                               value="JWST/NIRCam" checked>JWST Test Data</input>
+	              </td>
+                    </tr>
+	          </TABLE>
+              </td></tr>
 
-    <tr><td> <hr noshade width="750" align="left" size=1> </td></tr>
+              <tr><td> <hr noshade width="100%" align="left" size=1> </td></tr>
 
-    <tr><td>
-	<TABLE width="750"  align="left" border=0>
-	    <TR> <TD align=left><b>Image Data Collections: </b></TD>
-	    <td align=left> <font size=-1>
-		<input type="radio" name="Collection" value="none">Null/Echo Test&nbsp;</input>
-		<input type="radio" name="Collection" value="all">All&nbsp;</input>
-		<input type="radio" name="Collection" value="JWST/NIRCam" checked>JWST Test Data</input>
-	    </font> </td> </tr>
-	</TABLE>
-    </td></tr>
+              <tr><td>
+	          <TABLE width="100%" align="left" border="0">
+	            <tr>
+                      <td align="left"><b>Output Data Formats: </b></td>
+	              <td align="left">
+		        <input type="radio" name="FORMAT" class="inradio"
+                               value="all" checked>All available</input>
+		        <input type="radio" name="FORMAT" class="inradio"
+                               value="fits">FITS image</input>
+		        <input type="radio" name="FORMAT" class="inradio"
+                               value="graphic">Graphics image</input>
+	            </td> </tr>
+	          </TABLE>
+              </td></tr>
 
-    <tr><td> <hr noshade width="750" align="left" size=1> </td></tr>
+              <tr><td> <hr noshade width="100%" align="left" size=1> </td></tr>
 
-    <tr><td>
-	<TABLE width="750"  align="left" border=0>
-	    <TR> <TD align=left><b>Data Formats: </b></TD>
-	    <td align=left> <font size=-1>
-		<input type="radio" name="FORMAT" value="all" checked>All available&nbsp;</input>
-		<input type="radio" name="FORMAT" value="fits">FITS image&nbsp;</input>
-		<input type="radio" name="FORMAT" value="graphic">Graphics image</input>
-	    </font> </td> </tr>
-	</TABLE>
-    </td></tr>
+              <tr><td>
+	          <TABLE width="100%"  align="left" border="0">
+	            <tr>
+                      <td align="left"><b>Query Response Format: </b></td>
+	              <td align="left">
+		        <input type="radio" name="RESPONSEFORMAT" value="html" checked>HTML</input>
+		        <input type="radio" name="RESPONSEFORMAT" value="votable">VOTable</input>
+		        <input type="radio" name="RESPONSEFORMAT" value="text">Text</input>
+		        <input type="radio" name="RESPONSEFORMAT" value="csv">CSV</input>
+	              </td>
+                    </tr>
+	          </TABLE>
+              </td></tr>
 
-    <tr><td>
-	<TABLE width="750"  align="left" border=0>
-	    <TR> <TD align=left><b>Query Response Format: </b></TD>
-	    <td align=left> <font size=-1>
-		<input type="radio" name="RESPONSEFORMAT" value="html" checked>HTML&nbsp;</input>
-		<input type="radio" name="RESPONSEFORMAT" value="votable">VOTable&nbsp;</input>
-		<input type="radio" name="RESPONSEFORMAT" value="text">Text&nbsp;</input>
-		<input type="radio" name="RESPONSEFORMAT" value="csv">CSV</input>
-	    </font> </td> </tr>
-	</TABLE>
-    </td></tr>
+              <tr><td> <hr noshade width="100%" align="left" size=1> </td></tr>
 
-    <tr><td> <hr noshade width="750" align="left"> </td></tr>
-    <tr><td>
-	<TABLE width="750" bgcolor=#d3d3d3 cellspacing=0 cellpadding=0 border=0>
-	    <TR><TD ALIGN="CENTER"><INPUT TYPE="SUBMIT"></TD>
-	    <TD ALIGN="CENTER"><INPUT TYPE="RESET" VALUE="Reset Form"></TD> </TR>
-	</TABLE>
-    </td></tr>
-    <tr><td> <hr noshade width="750" align="left"> </td></tr>
+              <tr><td>&nbsp;</td></tr>
+              <tr><td>
+	          <TABLE width="100%" align="left" border="0">
+	            <tr>
+                      <td align="center"><input class="inbutton" type="submit"></td>
+	              <td align="center"><input class="inbutton" type="reset" value="Reset Form"></td>
+                    </tr>
+	          </TABLE>
+              </td></tr>
+              <tr><td>&nbsp;</td></tr>
 
-</FORM>
-<!----------------------------------------------------------------------------->
-    <TR><TD></TD></TR>
-    <tr><td> <hr noshade width="750" align="left" size=10> </td></tr>
-    <TR><TD></TD></TR>
+            </FORM>
+            <!-- ======================================================================= -->
+        </td></tr>
 
-    <tr><td>
-	<TABLE WIDTH="750">
-	    <TR><TD>
-		Last modified: 8/11/2019 by the Astrolabe project at the U of Arizona.
-	    </TD></TR>
-	</TABLE>
-    </td></tr>
-    <tr><td> <hr noshade width="750" align="left"> </td></tr>
+        <tr><td>
+	    <TABLE width="100%" class="endtable">
+              <tr>
+                <td style="padding: 0;">
+                  <hr noshade width="100%" align="left" size=10 style="margin-bottom: 5px;">
+                </td>
+              </tr>
+              <tr>
+                <td style="padding: 0;">
+	          <span class="legal">
+                    Based on the obsolete NVO DALServer framework.
+		    Modified August 2019 by the Astrolabe project at the University of Arizona.
+	          </span>
+	        </td>
+              </tr>
+	    </TABLE>
+        </td></tr>
 
-</TABLE>
+      </TABLE>
+    </FONT>
+    <!-- ======================================================================= -->
 
-</FONT>
-</BODY>
+  </BODY>
 </HTML>

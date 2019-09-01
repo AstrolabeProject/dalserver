@@ -18,8 +18,12 @@
 
       body{font-family: Helvetica; font-size:14px;}
       td{font-family: Helvetica; color: #000000; font-size: 14px; padding: 1 0;}
+      .datetime{font-family: Helvetica; color: #ffffff; font-size: 12px;}
+      .disabled{color: #7f7f7f;}
       .inbox{margin-left: 4;}
       .inbutton{font-family: Helvetica; font-size: 16px;}
+      .inradio{margin-left: 10;}
+      .legal{color: #7f7f7f; font-size:11px; margin: 0 0 0 5;}
       .endtable{border: 0; border-style: none; border-spacing: 0;}
       .maintbl{border: 0; border-style: none; border-spacing: 0; margin: 10 0 0 20;}
       .toptbl{border: 0; border-style: none; border-spacing: 0;}
@@ -66,20 +70,20 @@
       <tr>
 	<td colspan=1 width="100%" height="80" align="left" bgcolor="#dfdfdf">
 	  <a href="http://astrolabe.arizona.edu/">
-	    <img src="docs/images/AstrolabeStrip.jpg" alt="Astrolabe" border=0
+	    <img src="docs/images/AstrolabeStrip.jpg" alt="Astrolabe" border="0"
                  height="80" width="100%">
 	  </a>
 	</td>
       </tr>
       <tr>
 	<td width="100%" colspan=2 align="right" bgcolor="#000000">
-	  <font color="#ffffff" face="Helvetica" style="font-size:12px">
+          <span class="datetime">
 	    <script language="Javascript" type="text/javascript">
 	      document.write(dayNames[day] + ", " + monthNames[month] + " ");
 	      document.write(date + ", " + year );
 	      document.write("&nbsp;");
 	    </script>
-	  </font>
+	  </span>
 	</td>
       </tr>
       <tr>
@@ -88,125 +92,124 @@
     </TABLE>
 
     <!-- ======================================================================= -->
-    <FONT face="helvetica,arial">
-      <TABLE align="left" width="750" class="maintbl">
-        <tr><td>
+    <TABLE align="left" width="750" class="maintbl">
+      <tr><td>
 
-            <!-- ======================================================================= -->
-            <FORM ACTION="/dals/scs-vos" METHOD="GET">
-              <INPUT type="hidden" name="REQUEST" value="queryData"></INPUT>
+          <!-- ======================================================================= -->
+          <FORM ACTION="/dals/scs-vos" METHOD="GET">
+            <INPUT type="hidden" name="REQUEST" value="queryData"></INPUT>
 
-<!--
-              <tr><td> <hr noshade width="100%" align="left" size=10> </td></tr>
---->
+            <tr><td>
+	        <TABLE width="100%" align="left" border="0">
+	          <tr>
+                    <td align="left"> <h2>Simple Cone Search (SCS) Service</h2> </td>
+	            <td align="right">(Astrolabe JWST data)</td></tr>
+	        </TABLE>
+            </td></tr>
+            <tr><td></td></tr>
 
-              <tr><td>
-	          <TABLE width="100%" align="left" border=0>
-	            <tr>
-                      <td align="left"> <h2>Simple Cone Search (SCS) Service</h2> </td>
-	              <td align="right">(Astrolabe JWST data)</td></tr>
-	          </TABLE>
-              </td></tr>
-              <tr><td></td></tr>
+            <tr><td>
+	        <TABLE width="100%" align="left" border="0">
+	          <tr>
+                    <td align="left"> <b>Search Parameters:</b> </td>
+	            <td align="right">Debug: <INPUT type=checkbox name="Debug"/> </td>
+                  </tr>
+	        </TABLE>
+            </td></tr>
 
-              <tr><td>
-	          <TABLE width="100%"  align="left" border=0>
-	            <tr>
-                      <td align="left"> <b>Search Parameters:</b> </td>
-	              <td align="right">Debug: <INPUT type=checkbox name="Debug"/> </td>
-                    </tr>
-	          </TABLE>
-              </td></tr>
+            <tr><td>
+	        <TABLE width="100%" align="left" border="0">
+	          <tr>
+		    <td align="right">RA (degrees):</td>
+		    <td> <INPUT name="RA" class="inbox" size="20" value="53.14"/> </td>
+		    <td align="right">DEC (degrees):</td>
+		    <td> <INPUT name="DEC" class="inbox" size="20" value="-27.8"/> </td>
+	          </tr>
+	          <tr>
+		    <td align="right">SR (search radius degrees):</td>
+		    <td> <INPUT name="SR" class="inbox" size="20" value="0.2"/> </td>
+		    <td align="right">MAXREC: </td>
+		    <td> <INPUT name="MAXREC" class="inbox" size="20" value=""/> </td>
+	          </tr>
+	          <tr>
+	          </tr>
+	        </TABLE>
+            </td></tr>
 
-              <tr><td>
-	          <TABLE width="100%" align="left" border=0>
-	            <tr>
-		      <td align="right">RA (degrees):</td>
-		      <td> <INPUT name="RA" class="inbox" size="20" value="53.14"/> </td>
-		      <td align="right">DEC (degrees):</td>
-		      <td> <INPUT name="DEC" class="inbox" size="20" value="-27.8"/> </td>
-	            </tr>
-	            <tr>
-		      <td align="right">SR (search radius degrees):</td>
-		      <td> <INPUT name="SR" class="inbox" size="20" value="0.2"/> </td>
-		      <td align="right">MAXREC: </td>
-		      <td> <INPUT name="MAXREC" class="inbox" size="20" value=""/> </td>
-	            </tr>
-	            <tr>
-	            </tr>
-	          </TABLE>
-              </td></tr>
+            <tr><td> <hr noshade width="100%" align="left" size=1> </td></tr>
 
-              <tr><td> <hr noshade width="100%" align="left" size=1> </td></tr>
+            <tr><td>
+	        <TABLE width="100%" align="left" border="0">
+	          <tr>
+                    <td align="left"><b>Available Tables: </b></td>
+	            <td align="left">
+		      <input type="radio" name="Collection" class="inradio"
+                             value="all">All</input>
+		      <input type="radio" name="Collection" class="inradio"
+                             value="JWST/NIRCam" checked>Astrolabe JWST Data</input>
+                    </td>
+                  </tr>
+	        </TABLE>
+            </td></tr>
 
-              <tr><td>
-	          <TABLE width="100%"  align="left" border=0>
-	            <tr>
-                      <td align="left"><b>Available Tables: </b></td>
-	              <td align="left">
-		        <input type="radio" name="Collection" value="all">All&nbsp;</input>
-		        <input type="radio" name="Collection"
-                               value="JWST/NIRCam" checked>Astrolabe JWST Data</input>
-                      </td>
-                    </tr>
-	          </TABLE>
-              </td></tr>
+            <tr><td> <hr noshade width="100%" align="left" size=1> </td></tr>
 
-              <tr><td> <hr noshade width="100%" align="left" size=1> </td></tr>
+            <tr><td>
+	        <TABLE width="100%" align="left" border="0">
+	          <tr>
+                    <td align="left"><b>Output Data Formats: </b></td>
+	            <td align="left">
+		      <input type="radio" name="FORMAT" class="inradio"
+                             value="html" checked>HTML</input>
+		      <input type="radio" name="FORMAT" class="inradio"
+                             value="text">Text</input>
+		      <input type="radio" name="FORMAT" class="inradio"
+                             value="csv">CSV</input>
+		      <input type="radio" name="FORMAT" class="inradio"
+                             value="votable">VOTable</input>
+		      <input type="radio" name="FORMAT" class="inradio"
+                             value="fits" disabled><span class="disabled">FITS</span></input>
+	            </td>
+                  </tr>
+	        </TABLE>
+            </td></tr>
 
-              <tr><td>
-	          <TABLE width="100%"  align="left" border=0>
-	            <tr>
-                      <td align="left"><b>Output Data Formats: </b></td>
-	              <td align="left">
-		          <input type="radio" name="FORMAT" value="html" checked>HTML&nbsp;</input>
-		          <input type="radio" name="FORMAT" value="text">Text&nbsp;</input>
-		          <input type="radio" name="FORMAT" value="csv">CSV&nbsp;</input>
-		          <input type="radio" name="FORMAT" value="votable">VOTable&nbsp;</input>
-		          <input type="radio" name="FORMAT" value="fits" disabled>
-	                    <font color="#7f7f7f">FITS</font></input>
-	              </td>
-                    </tr>
-	          </TABLE>
-              </td></tr>
+            <tr><td> <hr noshade width="100%" align="left" size=1> </td></tr>
 
-              <tr><td> <hr noshade width="100%" align="left" size=1> </td></tr>
+            <tr><td>&nbsp;</td></tr>
+            <tr><td>
+	        <TABLE width="100%" align="left" border="0">
+	          <tr>
+                    <td align="center"><input class="inbutton" type="submit"></td>
+	            <td align="center"><input class="inbutton" type="reset" value="Reset Form"></td>
+                  </tr>
+	        </TABLE>
+            </td></tr>
+            <tr><td>&nbsp;</td></tr>
 
-              <tr><td>&nbsp;</td></tr>
-              <tr><td>
-	          <TABLE width="100%" cellspacing=0 cellpadding=0 border=0>
-	            <tr>
-                      <td align="center"><input class="inbutton" type="submit"></td>
-	              <td align="center"><input class="inbutton" type="reset" value="Reset Form"></td>
-                    </tr>
-	          </TABLE>
-              </td></tr>
-              <tr><td>&nbsp;</td></tr>
+          </FORM>
+          <!-- ======================================================================= -->
+      </td></tr>
 
-            </FORM>
-            <!-- ======================================================================= -->
-        </td></tr>
+      <tr><td>
+	  <TABLE width="100%" class="endtable">
+            <tr>
+              <td style="padding: 0;">
+                <hr noshade width="100%" align="left" size=10 style="margin-bottom: 5px;">
+              </td>
+            </tr>
+            <tr>
+              <td style="padding: 0;">
+	        <span class="legal">
+                  Based on the obsolete NVO DALServer framework.
+		  Modified August 2019 by the Astrolabe project at the University of Arizona.
+	        </span>
+	      </td>
+            </tr>
+	  </TABLE>
+      </td></tr>
 
-        <tr><td>
-	    <TABLE width="100%" class="endtable">
-              <tr>
-                <td style="padding: 0;">
-                  <hr noshade width="100%" align="left" size=10 style="margin-bottom: 5px;">
-                </td>
-              </tr>
-              <tr>
-                <td style="padding: 0;">
-	          <span style="color: #7f7f7f; font-size:11px; margin: 0 0 0 5;">
-                    Based on the obsolete NVO DALServer framework.
-		    Modified August 2019 by the Astrolabe project at the University of Arizona.
-	          </span>
-	        </td>
-              </tr>
-	    </TABLE>
-        </td></tr>
-
-      </TABLE>
-    </FONT>
+    </TABLE>
     <!-- ======================================================================= -->
 
   </BODY>
