@@ -48,7 +48,7 @@ public class ScsServlet extends HttpServlet {
     /**
      * The DALServer engine version.
      */
-    private String DalServerVersion = "0.7";
+    private String DalServerVersion = "0.11";
 
     /**
      * The DALServer runtime context for a request.
