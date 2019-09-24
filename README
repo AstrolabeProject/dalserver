@@ -37,8 +37,7 @@ Installation
 ------------------
 
 To install DALServer, merely download the DALServer distribution tarball
-from the Web, unpack it (unpacking to /opt/services/dalserver would
-simplify things later, but is not required) and deploy the provided
+from the Web, unpack it and deploy the provided
 "dals.war" app file to your local application server, e.g., Tomcat.
 How a Web-app is deployed depends upon the application server, but this
 is typically done using the administration Web GUI of the application
@@ -72,7 +71,7 @@ configuration or a template file.
 Local configuration data is stored externally to the DALServer Webapp
 (dals.war) to ensure that it is not lost when a new version of the
 Webapp is installed.  By default local configuration data is stored in
-the directory "/opt/services/dalserver" on the server running the Java
+the directory "/etc/dals/config" on the server running the Java
 application server (refer to the instructions given in the detailed
 documentation if you need to use a different directory).  If you
 unpacked the DALServer tarball into this directory earlier, you will

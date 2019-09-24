@@ -38,8 +38,6 @@ The precompiled DALServer Web-app is installed as follows:<br>
 
   <li>Download the <a href="http://vaosa-vm1.aoc.nrao.edu/vo/dalserver/dalserver.tgz">DALServer installation
 tarball</a> from this page.</li>
-  <li>Unpack the tarball (unpacking to <span style="font-family: monospace;">/opt/services/dalserver</span> will
-simplify the installation).</li>
   <li>Deploy the prebuilt DALServer Web-app <span style="font-family: monospace;">dals.war</span> to the
 applications server (e.g., Tomcat).</li>
   <li>Wait a few seconds, then bring up <a href="http://localhost:8080/dals">http://localhost:8080/dals </a>in
@@ -70,7 +68,7 @@ modified configuration.&nbsp; The <a href="dalserver-config.html">Service Config
 Local configuration data is stored externally to the DALServer Webapp (<span style="font-family: monospace;">dals.war</span>)
 to ensure that it is not lost when a new version of the Webapp is
 installed. By default local configuration data is stored in the
-directory "<span style="font-family: monospace;">/opt/services/dalserver</span>"
+directory "<span style="font-family: monospace;">/etc/dals/config</span>"
 on the server running the Java application server (refer to the
 detailed documentation if you need to use a
 different directory). If you unpacked the DALServer tarball into this

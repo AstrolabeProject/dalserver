@@ -4,10 +4,10 @@ JSRC = src/dalserver
 WARNAME = $(APP).war
 BUILDWAR = dist/$(WARNAME)
 
-.PHONY: help build clean cleanall exec javadoc jar reset run war watch
+.PHONY: help build clean cleanall exec javadoc jar run stop war watch
 
 help:
-	@echo "Make what? Try: build, cleanall, docker, exec, jar, javadoc, reset, run, war, watch"
+	@echo "Make what? Try: build, cleanall, docker, exec, jar, javadoc, run, stop, war, watch"
 
 build:
 	ant all
@@ -30,12 +30,11 @@ javadoc:
 jar:
 	ant jar
 
-reset:
-	docker stop $(APP)
-	docker rm -f $(APP)
-
 run:
 	docker run -d --rm --name $(APP) -p 8080:8080 -v $(PWD)/images:/vos/images $(APP)
+
+stop:
+	docker stop $(APP)
 
 war:
 	ant war

@@ -37,7 +37,7 @@ configuration.
 	Web-app.
 
     o	Set up your local DALServer configuration directory.  The default
-    	location of this is /opt/services/dalserver, but it can be moved
+	location of this is /etc/dals/config, but it can be moved
 	if necessary (instructions for this will be provided elsewhere).
 
     o	In your Web browser, go to:
@@ -139,8 +139,7 @@ TAP Service Configuration
 
 For TAP services, the database connection is defined in the Tomcat
 configuration as a 'Resource' with the required name "jdbc/postgresql-tapuser".
-There are two files to be modified in the Tomcat config directory (typically
-either /opt/tomcat/conf or /etc/tomcat depending on the Linux distro):
+There are two files to be modified in the Tomcat config directory:
 
 Add the following to the 'server.xml' file:
 

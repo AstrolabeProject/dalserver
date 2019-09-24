@@ -13,7 +13,7 @@
 
 <p>All configuration of the DALServer Webapp and all local data service
 instances is controlled by text files contained in the local
-configuration directory, by default <span style="font-family: monospace;">/opt/services/dalserver</span> (see<span style="text-decoration: underline;"> <a href="#Changing_the_Configuration_Directory">Changing the Configuration Directory</a> </span><a href="#Changing_the_Configuration_Directory"><span style="text-decoration: underline;"></span></a>if a
+configuration directory, by default <span style="font-family: monospace;">/etc/dals/config</span> (see<span style="text-decoration: underline;"> <a href="#Changing_the_Configuration_Directory">Changing the Configuration Directory</a> </span><a href="#Changing_the_Configuration_Directory"><span style="text-decoration: underline;"></span></a>if a
 different directory is to be used).&nbsp; A single file (<span style="font-family: monospace;">server.conf)</span>
 defines all global configuration parameters and links to configuration
 files for any locally defined services.&nbsp; Each configured service
@@ -120,7 +120,7 @@ quoted if they contain whitespace or special metacharacters such as "=".<br>
 In practice the configuration file syntax should be familiar and
 intuitive, and should be obvious for the most part from the examples.<br>
 
-<h3><a class="mozTocH3" name="mozTocId824310"></a><a name="Changing_the_Configuration_Directory"></a>Changing the Configuration Directory</h3>The default configuration directory location is <span style="font-family: monospace;">/opt/services/dalserver</span>.&nbsp; This value is stored in the global DALServer configuration parameter <span style="font-family: monospace;">configDir</span> in server.conf.&nbsp;
+<h3><a class="mozTocH3" name="mozTocId824310"></a><a name="Changing_the_Configuration_Directory"></a>Changing the Configuration Directory</h3>The default configuration directory location is <span style="font-family: monospace;">/etc/dals/config</span>.&nbsp; This value is stored in the global DALServer configuration parameter <span style="font-family: monospace;">configDir</span> in server.conf.&nbsp;
 To use a different configuration directory, edit the value of configDir
 and do a configuration reload, directing reload to read from the new
 configuration directory.&nbsp; For example, to change the configuration

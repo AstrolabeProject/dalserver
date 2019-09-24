@@ -42,7 +42,7 @@ configuration.
 	Web-app.
 
     o	Set up your local DALServer configuration directory.  The default
-    	location of this is /opt/services/dalserver, but it can be moved
+	location of this is /etc/dals/config, but it can be moved
 	if necessary (instructions for this will be provided elsewhere).
 
     o	In your Web browser, go to:

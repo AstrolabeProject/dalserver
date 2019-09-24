@@ -112,7 +112,7 @@ import java.text.SimpleDateFormat;
 public class Config extends HttpServlet {
 
     // Some built-in defaults; normally set in external configuration.
-    private String configDir = "/opt/services/dalserver";
+    private String configDir = "/etc/dals/config";
     private String configFile = "server.conf";
     private String dalServerConfig = "server.conf";
     private String webAppConfig = null;
