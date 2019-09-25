@@ -9,7 +9,7 @@
 
   <property name="app.name"      value="dals"/>
   <property name="app.path"      value="/${app.name}"/>
-  <property name="app.version"   value="0.10-vos"/>
+  <property name="app.version"   value="0.11-vos"/>
   <property name="build.home"    value="${basedir}/build"/>
   <property name="config.home"   value="${basedir}/config"/>
   <property name="dist.home"     value="${basedir}/dist"/>
