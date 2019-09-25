@@ -1,8 +1,6 @@
 APP=dals
-IMGDIR = /vos/images
-JSRC = src/dalserver
-WARNAME = $(APP).war
-BUILDWAR = dist/$(WARNAME)
+WARNAME = ${APP}.war
+BUILDWAR = dist/${WARNAME}
 
 .PHONY: help build clean cleanall exec javadoc jar run stop war watch
 
@@ -18,11 +16,11 @@ clean:
 cleanall:
 	ant clean-all
 
-docker: $(BUILDWAR)
-	docker build -t $(APP) .
+docker: ${BUILDWAR}
+	docker build -t ${APP} .
 
 exec:
-	docker exec -it $(APP) /bin/bash
+	docker exec -it ${APP} /bin/bash
 
 javadoc:
 	ant javadoc
@@ -31,18 +29,18 @@ jar:
 	ant jar
 
 run:
-	docker run -d --rm --name $(APP) -p 8080:8080 -v $(PWD)/images:/vos/images $(APP)
+	docker run -d --rm --name ${APP} -p 8080:8080 -v ${PWD}/images:/vos/images ${APP}
 
 stop:
-	docker stop $(APP)
+	docker stop ${APP}
 
 war:
 	ant war
 
 watch:
-	docker logs -f $(APP)
+	docker logs -f ${APP}
 
-$(BUILDWAR):
+${BUILDWAR}:
 	ant all
 
 %:
