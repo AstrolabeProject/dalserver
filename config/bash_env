@@ -1,0 +1,39 @@
+# Bash Aliases and Functions.
+#   Written by: Tom Hicks. 02/26/2018
+#
+
+# turn off the damn default aliases:
+unalias l ls ll >/dev/null 2>/dev/null
+
+alias cdpath='echo $CDPATH'
+alias cls=clear
+dusm () { du -sm $* ; }
+ff () { find . -name $* -print ; }
+fps () { ps aux | grep -i $* | grep -v grep ; }
+fpw () { ps axwwo user,pid,ppid,stat,command | grep -i $* | grep -v grep ; }
+go () { pushd $* ; }
+alias hm='history 2>&1 | less'
+alias ht='history 35'
+alias lf='ls -CFH'
+alias lfl='ls -lFH'
+lflm () { ls -lFH $* 2>&1 | less ; }
+lfls () { ls -lSFH $* 2>&1 | less ; }
+lflt () { ls -ltFH $* 2>&1 | less ; }
+alias pathdump='echo $PATH | tr ":" "\n"'
+alias pd=dirs
+alias pdd='dirs | tr " " "\n"'
+alias pe='env | sort 2>&1 | less'
+pkcontents () { dpkg -L $* 2>&1 | less ; }
+pkfind () { dpkg -S $* | cut -f1 -d: | sort | uniq | grep -v ',' ; }
+pkgrep () { dpkg -S $* | sort | less ; }
+pkinfo () { apt-cache show $* 2>&1 | less ; }
+pklist () { dpkg -l $* 2>&1 | less ; }
+pkstat () { dpkg -s $* 2>&1 | less ; }
+portps () { sudo lsof -i :$* ; }
+alias pp=popd
+alias src=source
+to () { pushd $* ; }
+treed () { tree -d $* 2>&1 | less ; }
+treel () { tree $* 2>&1 | less ; }
+alias up='cd ..'
+alias view=less
