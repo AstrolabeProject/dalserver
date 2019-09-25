@@ -3,7 +3,7 @@ FROM tomcat:8.5
 MAINTAINER Tom Hicks <hickst@email.arizona.edu>
 
 RUN apt-get update \
-#     && apt-get install -y --no-install-recommends XXX \
+    && apt-get install -y --no-install-recommends less \
     && rm -rf /var/lib/apt/lists/*
 
 RUN mkdir -p /etc/dals/config /vos/resultStore /vos/staging /vos/images
