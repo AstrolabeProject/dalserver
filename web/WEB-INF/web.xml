@@ -35,16 +35,15 @@
 
     <!-- Service Definitions. -->
 
+    <!-- Reload Servlet. -->
     <servlet>
       <servlet-name>reload</servlet-name>
       <servlet-class>dalserver.Config</servlet-class>
-
-      <!-- Servlet Parameters. -->
-
       <init-param>
         <param-name>serviceName</param-name>
         <param-value>reload</param-value>
       </init-param>
+      <load-on-startup>2</load-on-startup>
     </servlet>
 
     <servlet-mapping>
@@ -52,63 +51,25 @@
       <url-pattern>/reload</url-pattern>
     </servlet-mapping>
 
+
+    <!-- Initialization Servlet. -->
     <servlet>
-      <servlet-name>scs-messier</servlet-name>
-      <servlet-class>dalserver.scs.ScsServlet</servlet-class>
-
-      <!-- Servlet Parameters. -->
-
+      <servlet-name>startup</servlet-name>
+      <servlet-class>dalserver.StartupServlet</servlet-class>
       <init-param>
         <param-name>serviceName</param-name>
-        <param-value>scs-messier</param-value>
+        <param-value>startup</param-value>
       </init-param>
       <init-param>
-        <param-name>serviceName</param-name>
-        <param-value>scs-messier</param-value>
+        <param-name>reloadURL</param-name>
+        <param-value>http://localhost:8080/dals/reload</param-value>
       </init-param>
-      <init-param>
-        <param-name>serviceClass</param-name>
-        <param-value>scs</param-value>
-      </init-param>
+      <load-on-startup>99</load-on-startup>
     </servlet>
 
     <servlet-mapping>
-      <servlet-name>scs-messier</servlet-name>
-      <url-pattern>/scs-messier</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
-      <servlet-name>siap</servlet-name>
-      <servlet-class>dalserver.sia.SiapServlet</servlet-class>
-
-      <!-- Servlet Parameters. -->
-
-      <init-param>
-        <param-name>serviceName</param-name>
-        <param-value>siap</param-value>
-      </init-param>
-    </servlet>
-
-    <servlet-mapping>
-      <servlet-name>siap</servlet-name>
-      <url-pattern>/siap</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
-      <servlet-name>ssap</servlet-name>
-      <servlet-class>dalserver.ssa.SsapServlet</servlet-class>
-
-      <!-- Servlet Parameters. -->
-
-      <init-param>
-        <param-name>serviceName</param-name>
-        <param-value>ssap-null</param-value>
-      </init-param>
-    </servlet>
-
-    <servlet-mapping>
-      <servlet-name>ssap</servlet-name>
-      <url-pattern>/ssap</url-pattern>
+      <servlet-name>startup</servlet-name>
+      <url-pattern>/startup</url-pattern>
     </servlet-mapping>
 
 </web-app>
