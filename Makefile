@@ -1,6 +1,7 @@
-APP=dals
-WARNAME = ${APP}.war
-BUILDWAR = dist/${WARNAME}
+IMG=dals
+NAME=dals
+PROJ=dals
+BUILDWAR = dist/dals.war
 
 .PHONY: help build clean cleanall exec javadoc jar run stop war watch
 
@@ -17,10 +18,10 @@ cleanall:
 	ant clean-all
 
 docker: ${BUILDWAR}
-	docker build -t ${APP} .
+	docker build -t ${IMG} .
 
 exec:
-	docker exec -it ${APP} /bin/bash
+	docker exec -it ${NAME} bash
 
 javadoc:
 	ant javadoc
@@ -29,16 +30,16 @@ jar:
 	ant jar
 
 run:
-	docker run -d --rm --name ${APP} -p 8080:8080 -v ${PWD}/images:/vos/images ${APP}
+	docker run -d --rm --name ${NAME} -p 8080:8080 -v ${PWD}/images:/vos/images ${IMG}
 
 stop:
-	docker stop ${APP}
+	docker stop ${NAME}
 
 war:
 	ant war
 
 watch:
-	docker logs -f ${APP}
+	docker logs -f ${NAME}
 
 ${BUILDWAR}:
 	ant all
