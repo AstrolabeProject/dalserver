@@ -51,8 +51,8 @@
               url="jdbc:postgresql://pgdb:5432/vos"
               username="tapuser"
               password="changeMe"
-              maxTotal="100" maxIdle="20" maxWaitMillis="-1"
-              connectionTimeout="30000"
+              maxTotal="100" maxIdle="20"
+              maxWaitMillis="20000"
               validationQuery="SELECT 1"
               testOnBorrow="true" />
   </GlobalNamingResources>
