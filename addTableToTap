@@ -21,4 +21,4 @@ lib/javacsv.jar:lib/javax.servlet.jar:lib/jdom2.jar:lib/jsqlparser.jar:lib/junit
 lib/kxml2-2.3.0.jar:lib/log4j.jar:lib/nekohtml.jar:lib/nom-tam-fits-1.11.jar:\
 lib/org.restlet.ext.fileupload.jar:lib/org.restlet.ext.servlet.jar:lib/org.restlet.jar:\
 lib/postgresql-jdbc.jar:lib/spring.jar:lib/texttable.jar:lib/xerces.jar:lib/xmlParserAPIs-2.6.1.jar\
-  dalserver.tap.TapSchema -d file:config/tap-admin.properties -s ${SCHEMA} -a ${TABLE}
+  dalserver.tap.TapSchema -d file:config/tap-load.properties -s ${SCHEMA} -a ${TABLE}
