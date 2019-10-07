@@ -1,6 +1,5 @@
-IMG=dals
-NAME=dals
-PROJ=dals
+IMG=dals-dev
+NAME=dals-dev
 BUILDWAR = dist/dals.war
 
 .PHONY: help build clean cleanall exec javadoc jar run stop war watch
@@ -30,7 +29,7 @@ jar:
 	ant jar
 
 run:
-	docker run -d --rm --name ${NAME} -p 8080:8080 -v ${PWD}/images:/vos/images ${IMG}
+	docker run -d --rm --name ${NAME} -p 8090:8080 -v ${PWD}/images:/vos/images ${IMG}
 
 stop:
 	docker stop ${NAME}
