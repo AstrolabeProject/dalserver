@@ -1,8 +1,3 @@
-/**
- * TapSchema.java
- * $ID*
- */
-
 package dalserver.tap;
 
 import dalserver.*;
@@ -26,7 +21,8 @@ import java.util.*;
  * Note, this is different from the OpenCADC TapSchema classes, that are
  * used to read the TAP schema at runtime to execute a query.
  *
- * @author DTody
+ *   @author DTody
+ *   Last Modified: Add debug logging. -TRH
  */
 public class TapSchema {
 
@@ -53,7 +49,7 @@ public class TapSchema {
 
     /** The DBMS schema to contain the TAP_SCHEMA tables. */
     private String tapSchemaName = TAP_SCHEMA;
-    
+
     /** No-arg constructor.  */
     public void TapSchema() { }
 
@@ -210,8 +206,10 @@ public class TapSchema {
      */
     public void addTables(String schemaName, String tableSet[])
 	throws SQLException {
+        log.debug("(addTables): schemaName: " + schemaName);
 
 	for (String tableName : tableSet) {
+            log.debug("(addTables): tableName: " + tableName);
 	    addTable(schemaName, tableName);
 	}
     }
@@ -382,6 +380,7 @@ public class TapSchema {
 
 	final String DEF_DATASOURCE = "jdbc/tapadmin";
 	TapSchema ts = new TapSchema();
+        log.debug("(main): DEF_DATASOURCE: " + DEF_DATASOURCE);
 
 	// Create the command line parser.
 	CommandLineParser parser = new DefaultParser();
@@ -422,6 +421,7 @@ public class TapSchema {
 	// Set the DataSource to be used.
 	try {
 	    String dsName = cli.getOptionValue("datasource", DEF_DATASOURCE);
+            log.debug("(main): dsName: " + dsName);
 	    DbmsDataSourceFactory dsFactory = new DbmsDataSourceFactory();
 	    DataSource ds = dsFactory.getDataSource(dsName);
 	    ts.setDataSource(ds);
@@ -437,6 +437,7 @@ public class TapSchema {
 
 	    // Get the name of the schema containing the data tables.
 	    String schemaName = cli.getOptionValue("schema");
+            log.debug("(main): schemaName: " + schemaName);
 
 	    // Add one or more tables to the Tap schema.
 	    String tables[] = cli.getOptionValues("add");
