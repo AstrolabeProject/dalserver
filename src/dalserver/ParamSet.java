@@ -33,7 +33,7 @@ public class ParamSet implements Iterable<Param> {
     // -------- Constructors -----------
 
     /** Create a new, empty generic parameter set. */
-    protected ParamSet() {
+    public ParamSet() {
 	params = new LinkedHashMap<String,Param>();
     }
 
