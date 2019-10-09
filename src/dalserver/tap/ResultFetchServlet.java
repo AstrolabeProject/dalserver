@@ -4,6 +4,7 @@ import dalserver.*;
 
 import java.io.*;
 import java.net.*;
+import java.text.MessageFormat;
 import javax.servlet.*;
 import javax.servlet.http.*;
 
@@ -16,28 +17,32 @@ import org.apache.log4j.Logger;
  *
  *   @version	1.0, 10/5/2019
  *   @author	Tom Hicks
- *   Last Modified: First working (but hardwired) version. Add config file reading. Rename class.
+ *   Last Modified: Successfully fetch result file. Rename resultDir/resultUrl config params.
+ *                  Add more checking. Use MessageFormat for messages. Cleanups.
  */
 public class ResultFetchServlet extends HttpServlet {
   private static final Logger log = Logger.getLogger(ResultFetchServlet.class);
 
-  /** Keys for reading values from a parameter map. */
-  private static final String BASEDIR_KEY = "baseDir";
-  private static final String BASEURL_KEY = "baseURL";
+  /** Directory where result files will be stored. */
+  private static final String RESULT_DIR_KEY = "resultDir";
+
+  /** Fileserver URL for retrieval of stored result files. */
+  private static final String RESULT_URL_KEY = "resultUrl";
+
+  /** Name of servlet parameter whose value is the result file to fetch from disk. */
+  private static final String RESULT_PARAM = "result";
 
   /** Size of file copy buffers. */
   private static final int BUFSIZE = 8192;
 
-  /** The default disk location where result files have been stored. */
-  private String baseDir = "/vos/resultStore";
+  /** The disk location where result files have been stored. */
+  private String resultDir = null;
 
-  /** The default base URL for calling this servlet. */
-  private String baseURL = "http://localhost:8080/dals/resultFetch/";
+  /** The base URL for calling this servlet. */
+  private String resultUrl = null;
 
   /** The DALServer runtime context for a request. */
   protected DalContext dalContext = null;
-
-  private ParamSet params = null;
 
 
   /** Servlet startup and initialization. */
@@ -59,40 +64,39 @@ public class ResultFetchServlet extends HttpServlet {
   public void doGet (HttpServletRequest servletRequest, HttpServletResponse servletResponse)
     throws IOException, ServletException
   {
-    // Internal data.
     boolean error = false;
     String operation = null;
-    RequestResponse response = null;
+    ParamSet params = new ParamSet();
+    RequestResponse response = new RequestResponse();
 
     try {
-      params = new ParamSet();
-      response = new RequestResponse();
       ServletContext servletContext = getServletContext();
       ServletConfig servletConfig = getServletConfig();
 
       this.dalContext = new DalContext((ParamSet)params, response,
                                        servletRequest, servletContext, servletConfig);
 
-      // Get the ResultStore storage management parameters.
-      this.baseDir = params.getValue(BASEDIR_KEY);
-      this.baseURL = params.getValue(BASEURL_KEY);
+      // get the ResultStore storage management parameters
+      this.resultDir = params.getValue(RESULT_DIR_KEY);
+      this.resultUrl = params.getValue(RESULT_URL_KEY);
 
-      if (baseDir == null || baseURL == null) {
-        log.error(
-          "(ResultFetchServlet.doGet): Configuration missing base directory and/or base URL: " +
-            BASEDIR_KEY + "=" + baseDir + " " + BASEURL_KEY + "=" + baseURL);
-      }
-      else {
-        System.err.println("(ResultFetchServlet.doGet): BASE PARAMETERS " +
-                           BASEDIR_KEY + "=" + baseDir + ", " + BASEURL_KEY + "=" + baseURL);
-        log.error("(ResultFetchServlet.doGet): BASE PARAMETERS " +
-                  BASEDIR_KEY + "=" + baseDir + ", " + BASEURL_KEY + "=" + baseURL);
+      if (resultDir == null || resultUrl == null) {
+        String errMsg = MessageFormat.format(
+          "(ResultFetchServlet): Configuration missing values for {0} ({1}) and/or {2} ({3})",
+          RESULT_DIR_KEY, resultDir, RESULT_URL_KEY, resultUrl);
+        log.error(errMsg);
+        throw new DalServerException(errMsg);
       }
 
-      String fileToken = "ckk27pgv8byupbwi"; // TODO: get file token: hardwired for now
+      String resultFilename = servletRequest.getParameter(RESULT_PARAM);
+      if (resultFilename == null) {
+        String errMsg = MessageFormat.format(
+          "Missing request parameter {0}, specifying which result file to fetch.", RESULT_PARAM);
+        throw new DalServerException(errMsg);
+      }
 
-      // try to file the identified result file on the disk
-      File resultFile = getResultFile("result_" + fileToken + ".xml");
+      // try to find the specified result file on the disk
+      File resultFile = getResultFile(resultFilename);
 
       // set servlet response parameters
       servletResponse.setContentType("text/xml;x-votable");
@@ -109,14 +113,9 @@ public class ResultFetchServlet extends HttpServlet {
         inStream.close();
         outStream.close();
       }
-
-    } catch (DalServerException dsx) {
-      error = this.errorResponse(params, servletResponse, dsx);
-    } finally {
-      if (error) {
-        params = null;
-        return;
-      }
+    }
+    catch (DalServerException dsx) {
+      errorResponse(params, servletResponse, dsx);
     }
   }
 
@@ -133,17 +132,20 @@ public class ResultFetchServlet extends HttpServlet {
 
   /** Get a File instance for the result file to be returned. */
   private File getResultFile (String filename) throws DalServerException {
-    File dir = new File(baseDir);
-    if ((dir == null) || !dir.exists() || !dir.isDirectory() || !dir.canRead())
-      throw new DalServerException(
-        "(ResultFetchServlet): Unable to find or read the configured results directory at '" +
-        baseDir + "'");
+    File dir = new File(resultDir);
+    if ((dir == null) || !dir.exists() || !dir.isDirectory() || !dir.canRead()) {
+      String errMsg = MessageFormat.format(
+        "(ResultFetchServlet): Unable to find or read the configured results directory {0}", resultDir);
+      throw new DalServerException(errMsg);
+    }
 
     File resultFile = new File(dir, filename);
-    if ((resultFile == null) || !resultFile.exists() || !resultFile.isFile() || !resultFile.canRead())
-      throw new DalServerException(
-        "(ResultFetchServlet): Unable to find or read the specified results file'" +
-        filename + "' from directory '" + baseDir + "'");
+    if ( (resultFile == null) || !resultFile.exists() ||
+         !resultFile.isFile() || !resultFile.canRead() ) {
+      String errMsg = MessageFormat.format(
+        "(ResultFetchServlet): Unable to find or read the specified results file {0} from directory {1}", filename, resultDir);
+      throw new DalServerException(errMsg);
+    }
 
     return resultFile;
   }
@@ -151,67 +153,61 @@ public class ResultFetchServlet extends HttpServlet {
 
   /**
    * Handle an exception, returning an error response to the client.
-   * This version return a VOTable.  If any further errors occur while
-   * returning the error response, a servlet-level error is returned
-   * instead.
+   * This version returns the error in a VOTable. If any further errors occur while
+   * returning the error response, a <tt>ServletException</tt> is returned instead.
    *
    * @param	params		The input service parameter set.
    *
-   * @param	response	Servlet response channel.  This will be
+   * @param	servletResponse	Servlet response channel, which will be
    *				reset to ensure that the output stream is
    *				correctly setup for the error response.
    *
-   * @param	ex		The exception which triggered the error
-   *				response.
+   * @param	ex		The exception which triggered this error response.
    */
   @SuppressWarnings("unchecked")
   private boolean errorResponse (ParamSet params,
                                  HttpServletResponse servletResponse, Exception ex)
     throws ServletException
   {
-    boolean error = true;
-    ServletOutputStream out = null;
-    RequestResponse r = null;
-    TableInfo info = null;
+    ServletOutputStream outStream = null;
+    RequestResponse reqResp = null;
+    TableInfo tableInfo = null;
 
     try {
-      // Set up a response object with QUERY_STATUS=ERROR. */
-      r = new RequestResponse();
-      r.setType("results");
-
-      String id, key = "QUERY_STATUS";
-      info = new TableInfo(key, "ERROR");
+      String key = "QUERY_STATUS";
+      // Set up a DALserver request-response object with QUERY_STATUS=ERROR. */
+      reqResp = new RequestResponse();
+      reqResp.setType("results");
+      tableInfo = new TableInfo(key, "ERROR");
       if (ex.getMessage() != null)
-        info.setContent(ex.getMessage());
-      r.addInfo(key, info);
-      r.echoParamInfos(params);
+        tableInfo.setContent(ex.getMessage());
+      reqResp.addInfo(key, tableInfo);
+      reqResp.echoParamInfos(params);
 
-      // Set up the output stream.
+      // set up the output stream
       servletResponse.resetBuffer();
       servletResponse.setContentType("text/xml;x-votable");
       servletResponse.setBufferSize(BUFSIZE);
-      out = servletResponse.getOutputStream();
+      outStream = servletResponse.getOutputStream();
 
-      // Write the output VOTable.
-      r.writeVOTable((OutputStream)out);
-
-    } catch (Exception ex1) {
-      throw new ServletException(ex1);
-
-    } finally {
-      if (out != null)
+      // write the error VOTable using information in the request-response object
+      reqResp.writeVOTable((OutputStream) outStream);
+    }
+    catch (Exception ex2) {
+      throw new ServletException(ex2);
+    }
+    finally {
+      if (outStream != null)
         try {
-          out.close();
-        } catch (IOException ex2) {
-          throw new ServletException(ex2);
+          outStream.close();
+        } catch (IOException iox) {
+          throw new ServletException(iox);
         }
-      if (r != null)
-        r = null;
-      if (info != null)
-        info = null;
+      reqResp = null;
+      tableInfo = null;
     }
 
-    return (error);
+    return true;                            // signal that the error was handled
   }
 
 }

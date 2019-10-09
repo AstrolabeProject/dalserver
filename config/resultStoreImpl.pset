@@ -8,5 +8,5 @@
 pset-name = ResultStoreImpl
 description = Configuration for the file-based ResultStore plugin
 
-baseDir = /vos/resultStore/
-baseURL = http://localhost:8080/dals/resultStore/
+resultDir = /vos/resultStore/
+resultUrl = http://localhost:8080/dals/tap-jwst/resultFetch?result={0}
