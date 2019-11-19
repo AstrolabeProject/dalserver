@@ -1,5 +1,5 @@
 ENVLOC=/etc/trhenv
-IMG=dals-dev
+IMG=dals:devel
 NAME=dals-dev
 BUILDWAR = dist/dals.war
 
