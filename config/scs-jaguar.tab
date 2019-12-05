@@ -3,10 +3,10 @@
 
 [table]
 
-table-name = sia.jcat
+table-name = sia.jaguar
 table-class = image.vao.mar2014
 description =
-    ObsCore-based SCS for the JWST Catalog table.
+    ObsCore-based SCS for the JWST Jaguar Catalog table.
 
 [standard]
 
