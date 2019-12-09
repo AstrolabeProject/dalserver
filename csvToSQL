@@ -1,0 +1,38 @@
+#!/bin/sh
+#  Shell script to generate SQL to load a database table given the table data in CSV form.
+#  The input CSV file must have a valid header line.
+#
+#    Written by: Tom Hicks. 12/8/2019.
+#    Last Modified: Initial creation.
+#
+#  Parameters:
+#    csvfile - Required: path to the CSV table file. The CSV file must have a header line.
+#
+#    table-name - Optional: the name of the table to load data into.
+#                 Default is the CSV filename w/o the '.csv' extension.
+#
+#    outfile - Optional: path to the output SQL script. Default is standard output.
+#
+progname=`basename $0`
+
+CSVFILE=$1
+tbl=`basename $CSVFILE .csv`
+TABLENAME=${2:-${tbl}}
+OUTFILE=${3}
+
+if [ $# -lt 1 -o "$1" = "-h" -o "$1" = "--help" ]; then
+  echo "Usage: $0 csv-file [table-name] [out-file]"
+  exit 1
+fi
+
+echo '<?xml version="1.0" encoding="UTF-8"?><keywords></keywords>' >/tmp/keywords.xml
+
+java -cp dist/dals.jar:lib/FITSWCS-2.4+dev.jar:lib/cadcDALI.jar:lib/cadcLog.jar:\
+lib/cadcRegistryClient.jar:lib/cadcTAP.jar:lib/cadcUWS.jar:lib/cadcUtil.jar:lib/cadcVOSI.jar:\
+lib/cds-savot-2.6.jar:lib/cds-savot-3.0.jar:lib/commons-cli-1.3.jar:lib/commons-dbcp-1.4.jar:\
+lib/commons-fileupload.jar:lib/commons-logging.jar:lib/commons-pool-1.6.jar:lib/horizon-data.jar:\
+lib/javacsv.jar:lib/javax.servlet.jar:lib/jdom2.jar:lib/jsqlparser.jar:lib/junit-4.8.1.jar:\
+lib/kxml2-2.3.0.jar:lib/log4j.jar:lib/nekohtml.jar:lib/nom-tam-fits-1.11.jar:\
+lib/org.restlet.ext.fileupload.jar:lib/org.restlet.ext.servlet.jar:lib/org.restlet.jar:\
+lib/postgresql-jdbc.jar:lib/spring.jar:lib/texttable.jar:lib/xerces.jar:lib/xmlParserAPIs-2.6.1.jar\
+   dalserver.conf.DbLoadCSV $CSVFILE /tmp/keywords.xml $TABLENAME $OUTFILE
