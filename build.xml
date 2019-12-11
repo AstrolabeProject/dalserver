@@ -368,4 +368,14 @@
 
   </target>
 
+<!-- ==================== App Targets =================================== -->
+
+  <target name="TapSchema" depends="compile">
+    <java classpathref="compile.classpath"
+          classname="dalserver.tap.TapSchema"
+          description="Create or update the TAP Schema">
+      <arg line="${args}"/>
+    </java>
+  </target>
+
 </project>
