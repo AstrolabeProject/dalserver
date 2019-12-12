@@ -1,4 +1,4 @@
-FROM tomcat:8.5
+FROM tomcat:8.5.49
 
 MAINTAINER Tom Hicks <hickst@email.arizona.edu>
 
