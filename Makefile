@@ -17,6 +17,7 @@ help:
 	@echo '           javadoc  - rebuild the DALS documentation'
 	@echo '           run      - start a standalone development server container (for testing)'
 	@echo '           stop     - stop a running standalone development server'
+	@echo '           update   - copy config & web files into running server (for development)'
 	@echo '           war      - build the DALS WAR file (for development)'
 	@echo '           watch    - show logfile for a running standalone development server'
 
@@ -48,6 +49,16 @@ run:
 stop:
 	docker stop ${NAME}
 
+update:
+	docker cp ${PWD}/config ${NAME}:/etc/dals
+	docker cp ${PWD}/web/index.html ${NAME}:/usr/local/tomcat/webapps/dals
+	docker cp ${PWD}/web/scs-eazy.html ${NAME}:/usr/local/tomcat/webapps/dals
+	docker cp ${PWD}/web/scs-jaguar.html ${NAME}:/usr/local/tomcat/webapps/dals
+	docker cp ${PWD}/web/scs-jwst.html ${NAME}:/usr/local/tomcat/webapps/dals
+	docker cp ${PWD}/web/scs-photo.html ${NAME}:/usr/local/tomcat/webapps/dals
+	docker cp ${PWD}/web/siav1-jwst.html ${NAME}:/usr/local/tomcat/webapps/dals
+	docker cp ${PWD}/web/siav2-jwst.html ${NAME}:/usr/local/tomcat/webapps/dals
+
 war:
 	ant war
 
@@ -56,6 +67,3 @@ watch:
 
 ${BUILDWAR}:
 	ant all
-
-%:
-	@:
