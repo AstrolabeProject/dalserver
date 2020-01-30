@@ -103,8 +103,8 @@
             <tr><td>
 	        <TABLE width="100%" align="left" border="0">
 	          <tr>
-                    <td align="left"> <h2>Simple Image Access (SIA) V2 Service</h2> </td>
-	            <td align="right">(Astrolabe JWST data)</td></tr>
+                    <td align="left"> <h2>JWST Images Catalog - SIA V2 query</h2> </td>
+	            <td align="right">(Astrolabe/JWST)</td></tr>
 	        </TABLE>
             </td></tr>
             <tr><td></td></tr>
@@ -138,12 +138,12 @@
                     <td align="right">FOV (degrees):</td>
                     <td> <INPUT name="FOV" class="inbox" size="20" value=""/> </td>
                   </tr>
-                  <tr>
-                    <td align="right" class="disabled">DATA TYPE ("image|cube"): </td>
-                    <td> <INPUT name="DPTYPE" class="inbox" size="20" value="image" disabled/> </td>
-                    <td align="right" class="disabled">MODE ("archival|cutout|match"): </td>
-                    <td> <INPUT name="MODE" class="inbox" size="20" value="archival" disabled/> </td>
-                  </tr>
+                  <!-- <tr> -->
+                  <!--   <td align="right" class="disabled">DATA TYPE ("image|cube"): </td> -->
+                  <!--   <td> <INPUT name="DPTYPE" class="inbox" size="20" value="image" disabled/> </td> -->
+                  <!--   <td align="right" class="disabled">MODE ("archival|cutout|match"): </td> -->
+                  <!--   <td> <INPUT name="MODE" class="inbox" size="20" value="archival" disabled/> </td> -->
+                  <!-- </tr> -->
                   <tr>
                     <td align="right">FACILITY:</td>
                     <td> <INPUT name="FACILITY" class="inbox" size="20" value=""/> </td>
@@ -173,9 +173,11 @@
 		      <input type="radio" name="Collection" class="inradio"
                              value="none">Null/Echo Test</input>
 		      <input type="radio" name="Collection" class="inradio"
-                             value="all">All</input>
+                             value="all" checked>All</input>
 		      <input type="radio" name="Collection" class="inradio"
-                             value="JWST/images" checked>JWST Images</input>
+                             value="JADES">JADES</input>
+		      <input type="radio" name="Collection" class="inradio"
+                             value="DC_191217">Data Challenge (12/17/2019)</input>
 	            </td>
                   </tr>
 	        </TABLE>
