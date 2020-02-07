@@ -24,7 +24,6 @@
       .inbutton{font-family: Helvetica; font-size: 16px;}
       .inradio{margin-left: 10;}
       .legal{color: #7f7f7f; font-size:11px; margin: 0 0 0 5;}
-      .list{margin: 10 5;}
       .endtable{border: 0; border-style: none; border-spacing: 0;}
       .maintbl{border: 0; border-style: none; border-spacing: 0; margin: 10 0 0 20;}
       .toptbl{border: 0; border-style: none; border-spacing: 0;}
@@ -61,7 +60,7 @@
       var date = now.getDate();
     </script>
 
-    <title>ALVO</title>
+    <title>ALVO Cone Search</title>
   </HEAD>
 
   <!-- ======================================================================= -->
@@ -96,48 +95,84 @@
     <TABLE align="left" width="750" class="maintbl">
       <tr><td>
 
-          <H2>Welcome to the Astrolabe Virtual Observatory Server (ALVO)</H2>
+          <!-- ======================================================================= -->
+          <FORM ACTION="/dals/scs-photo200" METHOD="GET">
+            <INPUT type="hidden" name="REQUEST" value="queryData"></INPUT>
 
-          <H3>Services Test Pages:</H3>
-          <p>
-            The following pages allow the testing of queries for the various VO
-            services provided by this server. As such, they are not meant to provide
-            all the capabilities or interactions of a full VO client. Also, they are
-            currently a work-in-progress and some functionality might not yet be available.
-          </p>
-          <ul>
-            <li class="list">
-              <a href="scs-jaguar.html">JADES Jaguar v1.1 Catalog - Simple Cone Search (SCS)</a>
-            </li>
-            <li class="list">
-              <a href="scs-eazy.html">JADES EAZY Results Summary Catalog - Simple Cone Search (SCS)</a>
-            </li>
-            <li class="list">
-              <a href="scs-photo.html">JADES Photometric Catalog - Simple Cone Search (SCS)</a>
-            </li>
-            <li class="list">
-              <a href="scs-jwst.html">JWST Images Metadata - Simple Cone Search (SCS)</a>
-            </li>
-            <li class="list">
-              <a href="siav1-jwst.html">JWST Images Metadata - Simple Image Access (SIA) V1 Query</a>
-            </li>
-            <li class="list">
-              <a href="siav2-jwst.html">JWST Images Metadata - Simple Image Access (SIA) V2 Query</a>
-            </li>
-            <li class="list">
-              <a href="scs-eazy200.html">mini Data Challenge - EAZY F200W Results Summary Catalog - Simple Cone Search (SCS)</a>
-            </li>
-            <li class="list">
-              <a href="scs-eazy356.html">mini Data Challenge - EAZY F356W Results Summary Catalog - Simple Cone Search (SCS)</a>
-            </li>
-            <li class="list">
-              <a href="scs-photo200.html">mini Data Challenge - Photometric F200W Catalog - Simple Cone Search (SCS)</a>
-            </li>
-            <li class="list">
-              <a href="scs-photo356.html">mini Data Challenge - Photometric F356W Catalog - Simple Cone Search (SCS)</a>
-            </li>
-          </ul>
+            <tr><td>
+	        <TABLE width="100%" align="left" border="0">
+	          <tr>
+                    <td align="left"> <h2>miniDC Photometric F200W Catalog - SCS</h2> </td>
+	            <td align="right">(Astrolabe/JWST)</td></tr>
+	        </TABLE>
+            </td></tr>
+            <tr><td></td></tr>
 
+            <tr><td>
+	        <TABLE width="100%" align="left" border="0">
+	          <tr>
+                    <td align="left"> <b>Search Parameters:</b> </td>
+	            <td align="right">Debug: <INPUT type=checkbox name="Debug"/> </td>
+                  </tr>
+	        </TABLE>
+            </td></tr>
+
+            <tr><td>
+	        <TABLE width="100%" align="left" border="0">
+	          <tr>
+		    <td align="right">RA (degrees):</td>
+		    <td> <INPUT name="RA" class="inbox" size="20" value="53.14"/> </td>
+		    <td align="right">DEC (degrees):</td>
+		    <td> <INPUT name="DEC" class="inbox" size="20" value="-27.79"/> </td>
+	          </tr>
+	          <tr>
+		    <td align="right">SR (search radius degrees):</td>
+		    <td> <INPUT name="SR" class="inbox" size="20" value="0.002"/> </td>
+		    <td align="right">MAXREC: </td>
+		    <td> <INPUT name="MAXREC" class="inbox" size="20" value=""/> </td>
+	          </tr>
+	          <tr>
+	          </tr>
+	        </TABLE>
+            </td></tr>
+
+            <tr><td> <hr noshade width="100%" align="left" size=1> </td></tr>
+
+            <tr><td>
+	        <TABLE width="100%" align="left" border="0">
+	          <tr>
+                    <td align="left"><b>Query Response Formats: </b></td>
+	            <td align="left">
+		      <input type="radio" name="RESPONSEFORMAT" class="inradio"
+                             value="html" checked>HTML</input>
+		      <input type="radio" name="RESPONSEFORMAT" class="inradio"
+                             value="votable">VOTable</input>
+		      <input type="radio" name="RESPONSEFORMAT" class="inradio"
+                             value="text">Text</input>
+		      <input type="radio" name="RESPONSEFORMAT" class="inradio"
+                             value="csv">CSV</input>
+		      <input type="radio" name="RESPONSEFORMAT" class="inradio"
+                             value="fits" disabled><span class="disabled">FITS</span></input>
+	            </td>
+                  </tr>
+	        </TABLE>
+            </td></tr>
+
+            <tr><td> <hr noshade width="100%" align="left" size=1> </td></tr>
+
+            <tr><td>&nbsp;</td></tr>
+            <tr><td>
+	        <TABLE width="100%" align="left" border="0">
+	          <tr>
+                    <td align="center"><input class="inbutton" type="submit"></td>
+	            <td align="center"><input class="inbutton" type="reset" value="Reset Form"></td>
+                  </tr>
+	        </TABLE>
+            </td></tr>
+            <tr><td>&nbsp;</td></tr>
+
+          </FORM>
+          <!-- ======================================================================= -->
       </td></tr>
 
       <tr><td>

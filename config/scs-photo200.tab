@@ -1,0 +1,67 @@
+# Astrolabe Project - SCS search table configuration.
+# ---------------------------------------------------------------------------
+
+[table]
+
+table-name = sia.photometric200
+table-class = image.vao.mar2014
+description =
+    ObsCore-based SCS for the mini Data Challenge Photometric F200W Catalog table.
+
+[standard]
+
+# Table configuration for an SCS service is optional and is used only to
+# enhance the query response. With SCS, we are limited to setting VO metadata
+# for the table fields, or omitting selected fields.
+# ---------------------------------------------------------------------------
+
+# Add/modify VO metadata for selected table fields:
+# obsid		utype=DataID.ObservationID
+# format	utype=Access.Format
+# estsize	utype=Access.Size ucd=meta.number unit=kB
+# datalength	utype=Dataset.Length ucd=meta.number unit=pixels
+# nsubarrays	utype=Image.Nsubarrays ucd=meta.number
+# naxes		utype=Image.Naxes ucd=meta.number
+# naxis1	utype=Image.Naxis ucd=meta.number
+# naxis2	utype=Image.Naxis ucd=meta.number
+# naxis3	utype=Image.Naxis ucd=meta.number
+# naxis4	utype=Image.Naxis ucd=meta.number
+# pixtype	utype=Image.Pixtype
+
+# This demonstrates multiple line continuation and quoted string values.
+# spatiallocation1 id=ra name=ra descr="RA at center of field"\
+# 		utype = Char.SpatialAxis.Coverage.Location.Coord.Position2D.Value2.C1\
+# 		ucd = pos.eq.ra;meta.main unit=deg
+# spatiallocation2 id=dec name=dec\
+# 		utype=Char.SpatialAxis.Coverage.Location.Coord.Position2D.Value2.C2\
+# 		ucd=pos.eq.dec;meta.main unit=deg
+
+
+# Omit the following fields.
+# ---------------------------------------------------------------------------
+calib_level             omit
+equinox                 omit
+facility_name           omit
+im_naxes                omit
+im_nsubarrays           omit
+im_pixtype              omit
+im_wcsaxes1             omit
+im_wcsaxes2             omit
+o_ucd                   omit
+obs_bandpass            omit
+obs_creation_date       omit
+s_fov                   omit
+s_region                omit
+t_resolution            omit
+t_xel                   omit
+# im_ra1		omit
+# im_dec1		omit
+# im_ra2		omit
+# im_dec2		omit
+# im_ra3		omit
+# im_dec3		omit
+# im_ra4		omit
+# im_dec4		omit
+
+# [custom]
+# We can't add custom fields for SCS since there is no data model to extend.
