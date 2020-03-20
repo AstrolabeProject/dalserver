@@ -10,3 +10,5 @@ RUN mkdir -p /etc/dals/config /vos/resultStore /vos/staging /vos/images
 COPY web/META-INF/context.xml web/META-INF/server.xml ${CATALINA_HOME}/conf/
 COPY dist/dals.war ${CATALINA_HOME}/webapps
 COPY config/* /etc/dals/config/
+
+EXPOSE 8090

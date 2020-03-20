@@ -47,14 +47,14 @@ configuration.
 
     o	In your Web browser, go to:
 
-	    http://localhost:8080/dals/reload
+	    http://localhost:8090/dals/reload
 
 	This should load all the servlets defined in the server.conf file
 	in your configuration directory.
 
     o   The provided test services should now be active and can be
 	accessed via their standard VO REST Web service interface.  The
-	page http://localhost:8080/dals can also be used to try out the
+	page http://localhost:8090/dals can also be used to try out the
 	included pre-built demonstration/test servlets.  Use these to
 	verify that things are working normally [in the current development
 	version some of these are broken, i.e, not fully configured].

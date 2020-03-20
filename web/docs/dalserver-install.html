@@ -40,7 +40,7 @@ The precompiled DALServer Web-app is installed as follows:<br>
 tarball</a> from this page.</li>
   <li>Deploy the prebuilt DALServer Web-app <span style="font-family: monospace;">dals.war</span> to the
 applications server (e.g., Tomcat).</li>
-  <li>Wait a few seconds, then bring up <a href="http://localhost:8080/dals">http://localhost:8080/dals </a>in
+  <li>Wait a few seconds, then bring up <a href="http://localhost:8090/dals">http://localhost:8090/dals </a>in
 a Web browser (a different URL may be required depending upon how the applications server was installed).</li>
 </ul>The browser should then display the DALServer administration
 console.&nbsp; At this point this is just a static Web page providing
@@ -110,11 +110,11 @@ configuration changes or
 whenever a new version of the DALServer Webapp is installed.&nbsp;<span style="font-style: italic;"></span></p>
 
 <p>For example, to execute a reload for an application server running
-on port 8080 on the localhost, visit the following URL:<br>
+on port 8090 on the localhost, visit the following URL:<br>
 </p>
 
-<div style="margin-left: 40px;"><a href="http://localhost:8080/dals/reload">
-http://localhost:8080/dals/reload</a></div>
+<div style="margin-left: 40px;"><a href="http://localhost:8090/dals/reload">
+http://localhost:8090/dals/reload</a></div>
 
 <p>Note the application server must have read permission on the
 configuration directory for this to work.&nbsp; If
@@ -140,7 +140,7 @@ advanced services.&nbsp; DALServer is a Java Webapp; it is
 self-contained and uses Ant as the
 build tool.&nbsp; The details of how DALServer works internally and can
 be extended are beyond the scope of what we can cover here, however the
-<a href="http://localhost:8080/dals/javadoc/">DALServer Javadoc</a>
+<a href="http://localhost:8090/dals/javadoc/">DALServer Javadoc</a>
 built into every running DALServer instance describes the DALServer
 classes.<br>
 

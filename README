@@ -50,9 +50,9 @@ URL:
 
     http://<host>[:<port]/dals
 
-e.g., http://localhost:8080/dals would work for the usual case where
+e.g., http://localhost:8090/dals would work for the usual case where
 the application server is running on the local host computer on the
-default port, 8080.
+default port, 8090.
 
 The generic DALServer application contains several builtin services that
 may then be run via the Web UI to verify that everything is working
@@ -105,7 +105,7 @@ resource is used to reload the local configuration (for all service
 instances) [note - we need to add login/password authentication to
 prevent unauthorized use of reload].  For example,
 
-    http://localhost:8080/dals/reload
+    http://localhost:8090/dals/reload
 
 A reload should be performed whenever the configuration changes or
 whenever a new version of the DALServer Web-app is installed.  If

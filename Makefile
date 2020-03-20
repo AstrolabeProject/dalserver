@@ -44,7 +44,7 @@ javadoc:
 	ant javadoc
 
 run:
-	docker run -d --rm --name ${NAME} -p 8090:8080 -v ${PWD}/images:/vos/images ${IMG}
+	docker run -d --rm --name ${NAME} -p 8090:8090 -v ${PWD}/images:/vos/images ${IMG}
 
 stop:
 	docker stop ${NAME}

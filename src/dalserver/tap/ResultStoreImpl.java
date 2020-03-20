@@ -190,8 +190,8 @@ public class ResultStoreImpl implements ResultStore {
      * somewhere within the URL. For examples:
      *
      * <ul>
-     *   <li> http://localhost:8080/dalserver/fetchResult/{0}
-     *   <li> http://localhost:8080/dalserver/fetchResult?result={0}
+     *   <li> http://localhost:8090/dalserver/fetchResult/{0}
+     *   <li> http://localhost:8090/dalserver/fetchResult?result={0}
      * </ul>
      *
      * @param	filename	The name of the saved file whose URL is desired.

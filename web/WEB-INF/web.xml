@@ -62,7 +62,7 @@
       </init-param>
       <init-param>
         <param-name>reloadURL</param-name>
-        <param-value>http://localhost:8080/dals/reload</param-value>
+        <param-value>http://localhost:8090/dals/reload</param-value>
       </init-param>
       <load-on-startup>99</load-on-startup>
     </servlet>

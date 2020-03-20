@@ -42,8 +42,8 @@ is done by executing the "reload" Webapp resource, e.g.,<br>
 
 <br>
 
-<div style="margin-left: 40px;"><a href="http://localhost:8080/dals/reload">
-http://localhost:8080/dals/reload</a></div>
+<div style="margin-left: 40px;"><a href="http://localhost:8090/dals/reload">
+http://localhost:8090/dals/reload</a></div>
 
 <br>
 
@@ -70,8 +70,8 @@ follows:<br>
 <br>
 
 
-<div style="margin-left: 40px;"><a href="http://localhost:8080/dals/reload">
-http://localhost:8080/dals/reload?key=foo</a><br>
+<div style="margin-left: 40px;"><a href="http://localhost:8090/dals/reload">
+http://localhost:8090/dals/reload?key=foo</a><br>
 </div>
 
 
@@ -126,7 +126,7 @@ and do a configuration reload, directing reload to read from the new
 configuration directory.&nbsp; For example, to change the configuration
 directory to <span style="font-family: monospace;">/u1/config-test,</span> edit <span style="font-family: monospace;">/u1/config-test/server.conf </span>and change the value of configDir to <span style="font-family: monospace;">/u1/config-test,</span> then do a new reload as follows:<br>
 <dl>
-  <dd><a href="http://localhost:8080/dals/reload&amp;configDir=/u1/config-test"><span style="font-family: monospace;">http://localhost:8080/dals/reload&amp;configDir=/u1/config-test</span></a></dd>
+  <dd><a href="http://localhost:8090/dals/reload&amp;configDir=/u1/config-test"><span style="font-family: monospace;">http://localhost:8090/dals/reload&amp;configDir=/u1/config-test</span></a></dd>
 </dl>
 After that, all subsequent reloads will automatically use the new
 configuration directory (redeploying the Webapp will reset the default

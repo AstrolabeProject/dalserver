@@ -69,7 +69,7 @@ public class JhuProxyService extends SsapService {
 	"/spectrum/graph.aspx?";
 
     /** Base URL for dataset retrieval. */
-    // private static final String dataUrl = "http://localhost:8080" +
+    // private static final String dataUrl = "http://localhost:8090" +
     //private static final String dataUrl = "http://webtest.aoc.nrao.edu" + 
     //	"/ivoa-dal/JhuProxySsap?REQUEST=getData&";
 

@@ -63,7 +63,7 @@ public class JhuSsapService extends SsapService {
 	"/spectrum/spectrumssa_v3.1.0/get.aspx?";
 
     /** Base URL for dataset retrieval. */
-    // private static final String dataUrl = "http://localhost:8080" +
+    // private static final String dataUrl = "http://localhost:8090" +
     //private static final String dataUrl = "http://webtest.aoc.nrao.edu" + 
     //	"/ivoa-dal/JhuProxySsap?REQUEST=getData&";
 
@@ -1560,7 +1560,7 @@ public class JhuSsapService extends SsapService {
 	    // Simulate a typical query.
 	    SsapParamSet params = new SsapParamSet();
 
-	    Param p = new Param("baseUrl", "http://localhost:8080/ivoa-dal/");
+	    Param p = new Param("baseUrl", "http://localhost:8090/ivoa-dal/");
 	    params.addParam(p);
 	    Param q = new Param("serviceName", "JhuProxySsap");
 	    params.addParam(q);

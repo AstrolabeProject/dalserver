@@ -14,11 +14,12 @@ import javax.servlet.http.*;
  *
  * @version	1.0, 9/25/2019
  * @author	Tom Hicks
+ * Last Modified: Change reload URL to 8090.
  */
 public class StartupServlet extends HttpServlet {
 
   /** URL to call in this web application to load the configuration. */
-  private String reloadURL = "http://localhost:8080/dals/reload";
+  private String reloadURL = "http://localhost:8090/dals/reload";
 
   /** Servlet startup and initialization. */
   public void init (ServletConfig config) throws ServletException {
